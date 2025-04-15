@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import ArrowBack from "../assets/arrow_back.svg";
+import ArrowBack from "../assets/icons/arrow-back.svg";
 
 const TurnBackOnce = () => {
     const navigate = useNavigate();
