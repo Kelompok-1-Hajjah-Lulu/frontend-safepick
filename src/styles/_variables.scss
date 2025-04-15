@@ -7,3 +7,15 @@ $secondary-gold-color: #f2af29;
 
 $text-color: #1f2937;
 $background-color: #f9fafb;
+
+// typography
+$base-font-size: 16px;
+
+$font-48: clamp(2.5rem, 5vw, 3rem); // 48px
+$font-36: clamp(2rem, 4vw, 2.25rem); // 36px
+$font-32: clamp(1.875rem, 3.5vw, 2rem); // 32px
+$font-24: clamp(1.5rem, 3vw, 1.5rem); // 24px
+$font-20: clamp(1.25rem, 2.5vw, 1.25rem); // 20px
+$font-18: clamp(1.125rem, 2vw, 1.125rem); // 18px
+$font-16: clamp(1rem, 1.5vw, 1rem); // 16px
+$font-14: clamp(0.875rem, 1vw, 0.875rem); // 14px
