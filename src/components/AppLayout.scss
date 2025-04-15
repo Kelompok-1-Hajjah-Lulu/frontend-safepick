@@ -1,0 +1,8 @@
+@use "../styles/variables";
+
+.app-layout {
+    overflow-x: hidden;
+    width: 100vw;
+    min-height: 40vw;
+    position: relative;
+}

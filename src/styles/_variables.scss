@@ -1,3 +1,5 @@
+@use "sass:map";
+
 // colors
 $green-color: #00898b;
 $secondary-green-color: #d4feea;
@@ -12,19 +14,19 @@ $background-color: #f9fafb;
 $base-font-size: 16px;
 
 @function font-size-class($size) {
-    @return clamp(map-get($size, min), map-get($size, vw), map-get($size, max));
+    @return clamp(map.get($size, min), map.get($size, vw), map.get($size, max));
 }
 
 // prettier-ignore
 $font-sizes: (
-    48: (min: 2.5rem, vw: 5vw, max: 3rem),
-    36: (min: 2rem, vw: 4vw, max: 2.25rem),
-    32: (min: 1.875rem, vw: 3.5vw, max: 2rem),
-    24: (min: 1.5rem, vw: 3vw, max: 1.5rem),
-    20: (min: 1.25rem, vw: 2.5vw, max: 1.25rem),
-    18: (min: 1.125rem, vw: 2vw, max: 1.125rem),
-    16: (min: 1rem, vw: 1.5vw, max: 1rem),
-    14: (min: 0.875rem, vw: 1vw, max: 0.875rem)
+    48: (min: 2rem, vw: 4vw, max: 2.5rem),
+    36: (min: 1.75rem, vw: 3.5vw, max: 1.875rem),
+    32: (min: 1.5rem, vw: 3vw, max: 1.625rem),
+    24: (min: 1.25rem, vw: 2.5vw, max: 1.25rem),
+    20: (min: 1rem, vw: 2vw, max: 1rem),
+    18: (min: 0.875rem, vw: 1.5vw, max: 0.875rem),
+    16: (min: 0.75rem, vw: 1vw, max: 0.75rem),
+    14: (min: 0.625rem, vw: 0.75vw, max: 0.625rem)
 );
 
 @each $key, $value in $font-sizes {
