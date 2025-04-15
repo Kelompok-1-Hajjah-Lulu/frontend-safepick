@@ -7,6 +7,7 @@ import { Button, Divider } from "antd";
 import MataGedeImage from "../../assets/images/mata-gede.png"; // Adjust the path as needed
 import DepositoIcon from "../../assets/images/deposito-icon.png"; // Adjust the path as needed
 import Badge from "../../components/Badges/Badge";
+import RecommendationBadge from "../../components/Badges/RecommendationBadge";
 
 const CalculationPage: React.FC = () => {
     return (
@@ -34,6 +35,9 @@ const CalculationPage: React.FC = () => {
             />
             <section className="calculation-card-wrapper">
                 <BaseCard>
+                    <div className="rekomendasi-badge-wrapper">
+                        <RecommendationBadge />
+                    </div>
                     <h1>Tabungan E-Mas</h1>
                     <div className="wrapper-prediksi-container">
                         <img

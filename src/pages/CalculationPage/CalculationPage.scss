@@ -16,6 +16,12 @@ img.mata-gede-image {
     width: fill;
     gap: 20px;
     z-index: 10;
+    .rekomendasi-badge-wrapper {
+        position: absolute;
+        left: 0%;
+        top: 0%;
+        transform: translate(-25%, -50%);
+    }
     .wrapper-prediksi-container {
         display: flex;
         gap: 20px;
