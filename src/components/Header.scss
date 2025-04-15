@@ -15,6 +15,7 @@ $header-radius: 150vw;
     transform: translateX(-50%);
     position: absolute;
     border-radius: 0 0 $header-radius $header-radius;
+    z-index: -1;
 
     section.header {
         flex-direction: row;
