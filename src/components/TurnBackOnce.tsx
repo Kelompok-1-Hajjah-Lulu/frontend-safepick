@@ -8,7 +8,7 @@ const TurnBackOnce = () => {
             src={ArrowBack}
             alt="ArrowBack"
             onClick={() => navigate(-1)}
-            style={{ cursor: "pointer" }}
+            style={{ cursor: "pointer", width: "24px", height: "24px" }}
         />
     );
 };

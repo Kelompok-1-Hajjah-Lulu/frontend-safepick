@@ -1,0 +1,45 @@
+.header-calculation-page {
+    flex-direction: row;
+    gap: 7px;
+    margin-bottom: 5vw;
+}
+
+img.mata-gede-image {
+    position: absolute;
+    right: 0;
+    top: 10%;
+    z-index: -1;
+}
+
+.calculation-card-wrapper {
+    flex-direction: row;
+    width: fill;
+    gap: 20px;
+    z-index: 10;
+    .wrapper-prediksi-container {
+        display: flex;
+        gap: 20px;
+        margin-left: -20%;
+        img {
+            width: 35%;
+            height: max-content;
+        }
+        .prediksi-container {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            .card-icon {
+                float: left;
+            }
+            .upper-container {
+                display: flex;
+                gap: 30px;
+            }
+            .lower-container {
+                display: flex;
+                align-items: center;
+                gap: 5px;
+            }
+        }
+    }
+}
