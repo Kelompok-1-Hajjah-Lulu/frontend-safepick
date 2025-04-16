@@ -12,7 +12,10 @@ function App() {
             <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/calculation" element={<CalculationPage />} />
-                <Route path="/calculation/:id" element={<DetailPage />} />
+                <Route
+                    path="/calculation/:productParam"
+                    element={<DetailPage />}
+                />
             </Routes>
         </AppLayout>
     );

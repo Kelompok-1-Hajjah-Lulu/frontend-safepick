@@ -11,6 +11,7 @@ $header-radius: 150vw;
     );
     width: $header-width;
     height: 45vh;
+    max-height: 400px;
     left: 50%;
     transform: translateX(-50%);
     position: absolute;

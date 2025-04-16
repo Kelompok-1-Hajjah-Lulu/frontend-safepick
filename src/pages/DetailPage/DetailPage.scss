@@ -7,13 +7,56 @@
 
 section.detail-wrapper {
     gap: 20px;
+    .header-converter {
+        background-color: white;
+        border-radius: 20px;
+        box-shadow: 2px 2px 20px 0px #00000020;
+        padding: 20px 60px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        margin-top: -50px;
+    }
     .detail-container {
         display: flex;
         align-items: center;
+        justify-content: center;
+        gap: 20%;
+        gap: 10vw;
         width: 100%;
-        justify-content: space-around;
+        img.card-icon {
+            width: 20%;
+            height: max-content;
+        }
+        .inner-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2vw;
+            width: auto;
+            .left-container {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                gap: 20px;
+            }
+            .divider {
+                height: 120px;
+                width: 1px;
+                background-color: #000000b2;
+            }
+            .right-container {
+                display: flex;
+                gap: 10px;
+                .custom-badge {
+                    margin-top: 7%;
+                }
+            }
+        }
     }
     .return-prediction {
+        flex-wrap: wrap;
         flex-direction: row;
         gap: 20px;
         width: 100%;
