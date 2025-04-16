@@ -8,7 +8,6 @@ import BaseCard from "../../components/Cards/BaseCard";
 
 import GoldIcon from "../../assets/images/gold-icon.svg";
 import Badge from "../../components/Badges/Badge";
-import { Button } from "antd";
 import PredictionCard from "./components/PredictionCard";
 
 const DetailPage: React.FC = () => {
