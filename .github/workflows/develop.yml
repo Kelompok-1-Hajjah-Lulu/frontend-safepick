@@ -42,6 +42,6 @@ jobs:
         run: |
           docker run -d \
             --name safepick-frontend-staging \
-            -p 8081:80 \
+            -p 8081:3000 \
             --restart unless-stopped \
             ${{ secrets.DOCKERHUB_USERNAME }}/safepick-frontend:staging
