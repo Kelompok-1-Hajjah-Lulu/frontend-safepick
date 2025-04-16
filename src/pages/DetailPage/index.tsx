@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import TurnBackOnce from "../../components/TurnBackOnce";
 import "./DetailPage.scss";
 
@@ -7,10 +7,57 @@ import WarningCard from "../../components/Cards/WarningCard";
 import BaseCard from "../../components/Cards/BaseCard";
 
 import GoldIcon from "../../assets/images/gold-icon.svg";
+import DepositoIcon from "../../assets/images/deposito-icon.png";
 import Badge from "../../components/Badges/Badge";
 import PredictionCard from "./components/PredictionCard";
+import { useNavigate, useParams } from "react-router-dom";
+import { Button } from "antd";
+import { ArrowRightOutlined } from "@ant-design/icons";
+interface ProductDetails {
+    title: string;
+    icon: string;
+    description: string;
+    navigateTo: string;
+    navigationTitle: string;
+}
+
+const productMapping: Record<string, ProductDetails> = {
+    gold: {
+        title: "Tabungan E-Mas",
+        icon: GoldIcon,
+        description:
+            "Berdasarkan kalkulasi kami, berikut adalah keuntungan yang akan Anda dapatkan jika berinvestasi melalui Tabungan E-Mas",
+        navigateTo: "/calculation/deposito",
+        navigationTitle: "Deposito",
+    },
+    deposito: {
+        title: "Deposito",
+        icon: DepositoIcon,
+        description:
+            "Berdasarkan kalkulasi kami, berikut adalah keuntungan yang akan Anda dapatkan jika berinvestasi melalui Deposito",
+        navigateTo: "/calculation/gold",
+        navigationTitle: "Tabungan E-Mas",
+    },
+};
 
 const DetailPage: React.FC = () => {
+    const { productParam } = useParams<{ productParam: string }>();
+
+    const [product, setProduct] = useState("");
+    const [isGold, setIsGold] = useState(false);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (productParam === "gold" || productParam === "deposito") {
+            setProduct(productParam);
+            if (productParam === "gold") {
+                setIsGold(true);
+            }
+        } else {
+            navigate("/404");
+        }
+    }, [productParam, navigate]);
+
     return (
         <>
             <section className="header-calculation-page">
@@ -22,11 +69,11 @@ const DetailPage: React.FC = () => {
                         marginTop: "-3px",
                     }}
                 >
-                    <h1 className="font-24 text-white">Tabungan E-Mas</h1>
+                    <h1 className="font-24 text-white">
+                        {productMapping[product]?.title}
+                    </h1>
                     <p className="font-18 text-white">
-                        Berdasarkan kalkulasi kami, berikut adalah keuntungan
-                        yang akan Anda dapatkan jika berinvestasi melalui
-                        Tabungan E-Mas
+                        {productMapping[product]?.description}
                     </p>
                 </div>
             </section>
@@ -38,22 +85,33 @@ const DetailPage: React.FC = () => {
 
             <section className="detail-wrapper">
                 <div className="header-converter">
-                    <div className="flex flex-col">
+                    <div
+                        className="flex flex-col"
+                        style={
+                            !isGold
+                                ? { margin: "auto", textAlign: "center" }
+                                : {}
+                        }
+                    >
                         <p className="font-24 fw-600">Nominal Investasi</p>
                         <p className="font-24 fw-400">Rp2.000.000</p>
                     </div>
-                    <div className="font-16">setara dengan</div>
-                    <div className="flex flex-col">
-                        <p className="font-24 fw-600">Gram Emas</p>
-                        <p className="font-24 fw-400">1.5 gram</p>
-                    </div>
+                    {isGold && (
+                        <>
+                            <div className="font-16">setara dengan</div>
+                            <div className="flex flex-col">
+                                <p className="font-24 fw-600">Gram Emas</p>
+                                <p className="font-24 fw-400">1.5 gram</p>
+                            </div>
+                        </>
+                    )}
                 </div>
                 <BaseCard isRecommendation>
-                    <h1>Tabungan E-Mas</h1>
+                    <h1>{productMapping[product]?.title}</h1>
                     <div className="detail-container">
                         <img
                             className="card-icon"
-                            src={GoldIcon}
+                            src={isGold ? GoldIcon : DepositoIcon}
                             alt="Gold Icon"
                         />
                         <div className="inner-container">
@@ -64,14 +122,16 @@ const DetailPage: React.FC = () => {
                                     </p>
                                     <p className="font-16 fw-600">12 Bulan</p>
                                 </div>
-                                <div className="flex-flex-col">
-                                    <p className="font-16 fw-300">
-                                        Harga Buy Back
-                                    </p>
-                                    <p className="font-16 fw-600">
-                                        Rp2.000.000
-                                    </p>
-                                </div>
+                                {isGold && (
+                                    <div className="flex-flex-col">
+                                        <p className="font-16 fw-300">
+                                            Harga Buy Back
+                                        </p>
+                                        <p className="font-16 fw-600">
+                                            Rp2.000.000
+                                        </p>
+                                    </div>
+                                )}
                             </div>
                             <div className="divider"></div>
                             <div className="right-container">
@@ -95,6 +155,14 @@ const DetailPage: React.FC = () => {
                     <PredictionCard />
                     <PredictionCard />
                 </section>
+            </section>
+            <section>
+                <a href={productMapping[product]?.navigateTo}>
+                    <Button type="primary" className="custom-button green">
+                        Lihat Detail {productMapping[product]?.navigationTitle}{" "}
+                        <ArrowRightOutlined />
+                    </Button>
+                </a>
             </section>
 
             <section className="calculation-warning-recommendation">
