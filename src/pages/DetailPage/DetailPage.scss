@@ -13,4 +13,10 @@ section.detail-wrapper {
         width: 100%;
         justify-content: space-around;
     }
+    .return-prediction {
+        flex-direction: row;
+        gap: 20px;
+        width: 100%;
+        margin-block: 0;
+    }
 }

@@ -9,6 +9,7 @@ import BaseCard from "../../components/Cards/BaseCard";
 import GoldIcon from "../../assets/images/gold-icon.svg";
 import Badge from "../../components/Badges/Badge";
 import { Button } from "antd";
+import PredictionCard from "./components/PredictionCard";
 
 const DetailPage: React.FC = () => {
     return (
@@ -71,6 +72,11 @@ const DetailPage: React.FC = () => {
                     </div>
                 </BaseCard>
                 <p className="fw-600 font-20">Coba pilihan lain</p>
+                <section className="return-prediction">
+                    <PredictionCard />
+                    <PredictionCard />
+                    <PredictionCard />
+                </section>
             </section>
 
             <section className="calculation-warning-recommendation">
