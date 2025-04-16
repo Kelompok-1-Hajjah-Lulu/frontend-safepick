@@ -19,10 +19,29 @@ const PredictionForm = () => {
             </div>
 
             <div className="input-row">
-                <input
-                    type="text"
-                    placeholder="Input nominal yang ingin diinvestasikan"
-                />
+                <div
+                    className="input-wrapper"
+                    style={{ position: "relative", display: "flex", flex: 1 }}
+                >
+                    <p
+                        className="font-14 fw-300"
+                        style={{
+                            marginTop: "-10px",
+                            marginBottom: "20px",
+                            position: "absolute",
+                            top: "-15px",
+                            right: "0",
+                            color: "white",
+                        }}
+                    >
+                        Setara dengan <span className="fw-600">1.5 Gram</span>{" "}
+                        emas
+                    </p>
+                    <input
+                        type="text"
+                        placeholder="Input nominal yang ingin diinvestasikan"
+                    />
+                </div>
                 <select>
                     <option>Pilih Jangka Waktu</option>
                     <option value="1">1 Bulan</option>
@@ -31,12 +50,6 @@ const PredictionForm = () => {
                     <option value="12">12 Bulan</option>
                 </select>
             </div>
-            <p
-                className="font-14 fw-300"
-                style={{ marginTop: "-10px", marginBottom: "20px" }}
-            >
-                Setara dengan <span className="fw-600">1.5 Gram</span> emas
-            </p>
 
             <button className="btn-predict" onClick={handlePredictClick}>
                 Prediksi Keuntungan
