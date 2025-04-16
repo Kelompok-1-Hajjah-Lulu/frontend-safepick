@@ -37,6 +37,17 @@ const DetailPage: React.FC = () => {
             />
 
             <section className="detail-wrapper">
+                <div className="header-converter">
+                    <div className="flex flex-col">
+                        <p className="font-24 fw-600">Nominal Investasi</p>
+                        <p className="font-24 fw-400">Rp2.000.000</p>
+                    </div>
+                    <div className="font-16">setara dengan</div>
+                    <div className="flex flex-col">
+                        <p className="font-24 fw-600">Gram Emas</p>
+                        <p className="font-24 fw-400">1.5 gram</p>
+                    </div>
+                </div>
                 <BaseCard isRecommendation>
                     <h1>Tabungan E-Mas</h1>
                     <div className="detail-container">
@@ -45,29 +56,37 @@ const DetailPage: React.FC = () => {
                             src={GoldIcon}
                             alt="Gold Icon"
                         />
-                        <div className="detail-content">
-                            <div className="inner-container">
-                                <div className="flex flex-col">
-                                    <div className="flex flex-col">
-                                        <p className="font-16">
-                                            Prediksi Return
-                                        </p>
-                                        <p className="font-32 fw-600">
-                                            Rp2.000.000
-                                        </p>
-                                    </div>
-                                    <div className="flex flex-col">
-                                        <p className="font-16">
-                                            Prediksi Return
-                                        </p>
-                                        <p className="font-32 fw-600">
-                                            Rp2.000.000
-                                        </p>
-                                    </div>
+                        <div className="inner-container">
+                            <div className="left-container">
+                                <div className="flex-flex-col">
+                                    <p className="font-16 fw-300">
+                                        Jangka Waktu
+                                    </p>
+                                    <p className="font-16 fw-600">12 Bulan</p>
+                                </div>
+                                <div className="flex-flex-col">
+                                    <p className="font-16 fw-300">
+                                        Harga Buy Back
+                                    </p>
+                                    <p className="font-16 fw-600">
+                                        Rp2.000.000
+                                    </p>
+                                </div>
+                            </div>
+                            <div className="divider"></div>
+                            <div className="right-container">
+                                <div className="flex-flex-col">
+                                    <p className="font-16 fw-300">
+                                        Prediksi Return
+                                    </p>
+                                    <p className="font-32 fw-600">
+                                        Rp2.000.000
+                                    </p>
                                 </div>
                                 <Badge text="25%" color="green" />
                             </div>
                         </div>
+                        <div></div>
                     </div>
                 </BaseCard>
                 <p className="fw-600 font-20">Coba pilihan lain</p>
