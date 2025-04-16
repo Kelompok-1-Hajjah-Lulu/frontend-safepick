@@ -1,0 +1,15 @@
+@use "../../styles/variables";
+
+.warning-card {
+    background-color: white;
+    box-shadow: 2px 2px 20px 0px #00000020;
+    width: 50%;
+    margin: auto;
+    padding: 20px 25px;
+    display: flex;
+    align-items: start;
+    border-radius: 20px;
+    .gold {
+        color: variables.$gold-color;
+    }
+}

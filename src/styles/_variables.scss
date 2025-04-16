@@ -6,6 +6,7 @@ $secondary-green-color: #d4feea;
 
 $gold-color: #f2af29bf;
 $secondary-gold-color: #f2af29;
+$light-gold-color: #fff4cc;
 
 $text-color: #1f2937;
 $background-color: #f9fafb;
@@ -21,16 +22,32 @@ $base-font-size: 16px;
 $font-sizes: (
     48: (min: 2rem, vw: 4vw, max: 2.5rem),
     36: (min: 1.75rem, vw: 3.5vw, max: 1.875rem),
-    32: (min: 1.5rem, vw: 3vw, max: 1.625rem),
-    24: (min: 1.25rem, vw: 2.5vw, max: 1.25rem),
-    20: (min: 1rem, vw: 2vw, max: 1rem),
-    18: (min: 0.875rem, vw: 1.5vw, max: 0.875rem),
-    16: (min: 0.75rem, vw: 1vw, max: 0.75rem),
-    14: (min: 0.625rem, vw: 0.75vw, max: 0.625rem)
+    32: (min: 1.625rem, vw: 3.25vw, max: 1.75rem),
+    24: (min: 1.375rem, vw: 2.75vw, max: 1.375rem),
+    20: (min: 1.125rem, vw: 2.25vw, max: 1.125rem),
+    18: (min: 1rem, vw: 1.75vw, max: 1rem),
+    16: (min: 0.875rem, vw: 1.25vw, max: 0.875rem),
+    14: (min: 0.75rem, vw: 1vw, max: 0.75rem)
 );
 
 @each $key, $value in $font-sizes {
     .font-#{$key} {
         font-size: font-size-class($value);
+    }
+}
+
+// Font weight classes
+$font-weights: (
+    400: 400,
+    500: 500,
+    600: 600,
+    700: 700,
+    800: 800,
+    900: 900,
+);
+
+@each $weight, $name in $font-weights {
+    .fw-#{$weight} {
+        font-weight: $name;
     }
 }
