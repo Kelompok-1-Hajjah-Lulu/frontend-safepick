@@ -1,0 +1,16 @@
+@use "../../styles/variables";
+
+.calculation-warning-recommendation {
+    width: inherit;
+    padding: 20px 0;
+}
+
+section.detail-wrapper {
+    gap: 20px;
+    .detail-container {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        justify-content: space-around;
+    }
+}

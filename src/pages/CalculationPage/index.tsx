@@ -4,11 +4,10 @@ import "./CalculationPage.scss";
 import BaseCard from "../../components/Cards/BaseCard";
 import { Button } from "antd";
 
-import MataGedeImage from "../../assets/images/mata-gede.png";
+import BusinessMonitoringImage from "../../assets/images/business-monitoring.png";
 import DepositoIcon from "../../assets/images/deposito-icon.png";
 import GoldIcon from "../../assets/images/gold-icon.svg";
 import Badge from "../../components/Badges/Badge";
-import RecommendationBadge from "../../components/Badges/RecommendationBadge";
 import WarningCard from "../../components/Cards/WarningCard";
 
 const CalculationPage: React.FC = () => {
@@ -32,14 +31,11 @@ const CalculationPage: React.FC = () => {
             </section>
             <img
                 className="mata-gede-image"
-                src={MataGedeImage}
+                src={BusinessMonitoringImage}
                 alt="Mata Gede"
             />
             <section className="calculation-card-wrapper">
                 <BaseCard isRecommendation>
-                    <div className="rekomendasi-badge-wrapper">
-                        <RecommendationBadge />
-                    </div>
                     <div className="wrapper-prediksi-container">
                         <img
                             className="card-icon"
