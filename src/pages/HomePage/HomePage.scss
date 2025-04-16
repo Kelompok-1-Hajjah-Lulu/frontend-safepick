@@ -17,6 +17,10 @@
         max-width: 600px;
         margin-bottom: 1rem;
 
+        strong {
+            font-weight: bold;
+        }
+
         .highlight {
             font-weight: bold;
         }
@@ -93,6 +97,41 @@
                 );
             }
         }
+
+        .homepage-illustration {
+            position: absolute;
+            top: 5rem;
+            right: 0;
+            width: 50%;
+            max-width: 520px;
+            z-index: 1;
+            pointer-events: none; // biar tidak ganggu klik
+
+            @media (max-width: 768px) {
+                position: static;
+                width: 100%;
+                max-width: none;
+                margin-top: 2rem;
+            }
+        }
+    }
+
+    .global-decor {
+        position: absolute;
+        z-index: 0;
+        pointer-events: none;
+
+        &.star {
+            width: 100px;
+            bottom: -40px;
+            left: 50px;
+        }
+
+        &.graph {
+            width: 100px;
+            bottom: -40px;
+            right: 50px;
+        }
     }
 
     .section-title {
@@ -115,11 +154,33 @@
             position: relative;
             background: white;
             border-radius: 15px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
             padding: 1rem;
             max-width: 700px;
             flex: 1;
-            overflow: hidden;
+            overflow: visible;
+
+            &:hover {
+                box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1);
+            }
+
+            .icon-decor {
+                position: absolute;
+                z-index: 0;
+                pointer-events: none;
+
+                &.star {
+                    width: 90px;
+                    bottom: -30px;
+                    left: -30px;
+                }
+
+                &.graph {
+                    width: 90px;
+                    bottom: -30px;
+                    right: -30px;
+                }
+            }
 
             h4 {
                 font-size: 15px;
@@ -135,11 +196,10 @@
 
             .price-row {
                 display: grid;
-                grid-template-columns: 1fr 1px 1fr; // dua kolom + garis pemisah
+                grid-template-columns: auto 0px auto;
+                gap: 5rem;
                 align-items: center;
                 justify-content: center;
-                gap: 1.5rem;
-                margin-top: 1.5rem;
 
                 .price-block {
                     text-align: center;
@@ -179,23 +239,6 @@
                         height: 18px;
                         margin-right: 0.75rem;
                     }
-                }
-            }
-
-            .icon-decor {
-                position: absolute;
-                z-index: 1; // tetap di atas background tapi di bawah isi
-
-                &.star {
-                    width: 90px;
-                    bottom: -30px;
-                    left: -30px;
-                }
-
-                &.graph {
-                    width: 100px;
-                    bottom: -25px;
-                    right: -30px;
                 }
             }
         }

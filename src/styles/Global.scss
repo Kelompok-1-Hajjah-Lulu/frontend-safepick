@@ -55,3 +55,13 @@ button.custom-button {
         background-color: #00898bcf !important;
     }
 }
+
+// Styling khusus untuk Modal Ant Design
+.ant-modal-title {
+    font-weight: bold;
+    color: #ff9900;
+  }
+  
+  .ant-modal-body p {
+    margin-bottom: 0.5rem;
+  }

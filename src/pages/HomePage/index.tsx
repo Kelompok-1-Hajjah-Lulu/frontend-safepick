@@ -1,8 +1,20 @@
 import React from "react";
+import { Modal } from "antd";
+import { useState } from "react";
 import "./HomePage.scss";
 
 
 const HomePage: React.FC = () => {
+    const [isModalVisible, setIsModalVisible] = useState(false);
+
+    const handlePredictClick = () => {
+        setIsModalVisible(true);
+    };
+
+    const handleModalClose = () => {
+        setIsModalVisible(false);
+    };
+
     return (
         <section className="homepage">
             <p className="tagline">
@@ -33,15 +45,20 @@ const HomePage: React.FC = () => {
                     </select>
                 </div>
 
-                <button className="btn-predict">Prediksi Keuntungan</button>
+                <button className="btn-predict" onClick={handlePredictClick}>
+                    Prediksi Keuntungan
+                </button>
+
+                <img src="/icons/illustration-home.png" 
+                alt="Ilustrasi investasi" 
+                className="homepage-illustration"/>
             </div>
 
             <h3 className="section-title with-line">Tentang Produk Investasi</h3>
 
             <div className="product-cards">
             <div className="product-card emas">
-                <img src="/icons/star-decor.png" alt="bintang" className="icon-decor star" />
-
+            <img src="/icons/star-decor.png" alt="bintang" className="icon-decor star" />
                 <h4>Tabungan E-Mas</h4>
                 <p>
                 Fasilitas menabung berbasis rekening dengan akad Wadiah/Titipan dengan saldo berupa gram emas.
@@ -50,24 +67,21 @@ const HomePage: React.FC = () => {
                 <p>Minimal pembelian emas untuk Tabungan E-Mas mulai dari 0.1 gram</p>
 
                 <div className="price-row">
-                
                 <div className="price-block">
-                    <p><small>Harga beli (/gram)</small></p>
-                    <p><strong>Rp1.877.000</strong></p>
+                    <small>Harga beli (/gram)</small><br />
+                    <strong>Rp1.877.000</strong>
                 </div>
 
                 <div className="separator" />
-
                 <div className="price-block">
-                    <p><small>Harga jual (/gram)</small></p>
-                    <p><strong>Rp1.783.000</strong></p>
-                    </div>
+                    <small>Harga jual (/gram)</small><br />
+                    <strong>Rp1.783.000</strong>
                 </div>
+            </div>
             </div>
             
             <div className="product-card deposito">
-                <img src="/icons/graph-decor.png" alt="grafik" className="icon-decor graph" />
-
+            <img src="/icons/graph-decor.png" alt="grafik" className="icon-decor graph" />
                 <h4>Deposito</h4>
                 <p>Fasilitas investasi jangka waktu tertentu dengan akad Mudharabah Muthlaqah.</p>
                 <ul className="custom-list">
@@ -87,6 +101,24 @@ const HomePage: React.FC = () => {
             </div>
             </div>
 
+            <img src="/icons/star-decor.png" alt="star-decor" className="global-decor star"/>
+            <img src="/icons/graph-decor.png" alt="graph-decor" className="global-decor graph"/>
+
+            <Modal
+                title="⚠️ Perhatian"
+                open={isModalVisible}
+                onCancel={handleModalClose}
+                onOk={handleModalClose}
+                okText="Lanjut"
+                cancelButtonProps={{ style: { display: "none" } }}
+            >
+                <p>
+                    Rekomendasi dari <strong>SAFEPICK</strong> bersifat <strong>prediksi</strong> dan tidak menjamin hasil pasti.
+                </p>
+                <p>
+                    Keputusan dan <strong>risiko</strong> investasi sepenuhnya menjadi <strong>tanggung jawab pengguna</strong>.
+                </p>
+                </Modal>
         </section>
     );
 };

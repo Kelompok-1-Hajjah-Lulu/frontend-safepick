@@ -1,18 +1,25 @@
-# Stage 1 - Build
-FROM node:18-alpine AS builder
+# Menggunakan base image yang ringan
+FROM node:18-alpine
 
+# Mengatur direktori kerja
 WORKDIR /app
 
-COPY package*.json ./
+
+# Salin semua file proyek ke dalam container
+COPY . .
+
+
+# Instal dependensi
 RUN npm install
 
-COPY . .
+# Build aplikasi untuk mode produksi
 RUN npm run build
 
-# Stage 2 - Serve with Nginx
-FROM nginx:stable-alpine
+# Instal `serve` untuk melayani file statis
+RUN npm install -g serve
 
-COPY --from=builder /app/dist /usr/share/nginx/html
+# Ekspos port untuk aplikasi
+EXPOSE 3000
 
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+# Command untuk menjalankan aplikasi dalam mode produksi
+CMD ["serve", "-s", "dist", "-l", "3000"]
