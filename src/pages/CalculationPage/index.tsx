@@ -9,8 +9,27 @@ import DepositoIcon from "../../assets/images/deposito-icon.png";
 import GoldIcon from "../../assets/images/gold-icon.svg";
 import Badge from "../../components/Badges/Badge";
 import WarningCard from "../../components/Cards/WarningCard";
+import { useLocation } from "react-router-dom";
+import { PredictionResponse } from "../HomePage/components/PredictionForm";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { formatNumber } from "../../utils/formatNumber";
 
 const CalculationPage: React.FC = () => {
+    const location = useLocation();
+    const predictionData: PredictionResponse = location.state
+        .prediction as PredictionResponse;
+
+    const investmentAmount = location.state.investment;
+    const tenureAmount = location.state.tenure;
+
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (!predictionData) {
+            navigate("/");
+        }
+    }, [predictionData, navigate]);
     return (
         <>
             <section className="header-calculation-page">
@@ -34,6 +53,9 @@ const CalculationPage: React.FC = () => {
                 src={BusinessMonitoringImage}
                 alt="Mata Gede"
             />
+            {/* <section className="input-section">
+                <PredictionForm />
+            </section> */}
             <section className="calculation-card-wrapper">
                 <BaseCard isRecommendation>
                     <div className="wrapper-prediksi-container">
@@ -48,15 +70,29 @@ const CalculationPage: React.FC = () => {
                                 <div className="flex flex-col">
                                     <p className="font-16">Prediksi Return</p>
                                     <p className="font-32 fw-600">
-                                        Rp2.000.000
+                                        Rp
+                                        {formatNumber(
+                                            predictionData?.predicted_gold_price ??
+                                                0,
+                                        )}
                                     </p>
                                 </div>
-                                <Badge text="25%" color="green" />
+                                <Badge
+                                    text={predictionData?.gold_return_rate}
+                                    color="green"
+                                />
                             </div>
                             <Button
                                 type="primary"
                                 className="custom-button green"
-                                onClick={() => {}}
+                                onClick={() => {
+                                    navigate("/calculation/gold", {
+                                        state: {
+                                            investmentAmount: investmentAmount,
+                                            tenure: tenureAmount,
+                                        },
+                                    });
+                                }}
                             >
                                 Lihat Detail
                             </Button>
@@ -76,15 +112,28 @@ const CalculationPage: React.FC = () => {
                                 <div className="flex flex-col">
                                     <p className="font-16">Prediksi Return</p>
                                     <p className="font-32 fw-600">
-                                        Rp2.000.000
+                                        Rp{" "}
+                                        {formatNumber(
+                                            predictionData?.profit_deposit ?? 0,
+                                        )}
                                     </p>
                                 </div>
-                                <Badge text="25%" color="green" />
+                                <Badge
+                                    text={predictionData?.deposit_return_rate}
+                                    color="green"
+                                />
                             </div>
                             <Button
                                 type="primary"
                                 className="custom-button green"
-                                onClick={() => {}}
+                                onClick={() => {
+                                    navigate("/calculation/deposito", {
+                                        state: {
+                                            investmentAmount: investmentAmount,
+                                            tenure: tenureAmount,
+                                        },
+                                    });
+                                }}
                             >
                                 Lihat Detail
                             </Button>
