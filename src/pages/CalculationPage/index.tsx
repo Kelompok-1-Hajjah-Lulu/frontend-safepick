@@ -72,7 +72,7 @@ const CalculationPage: React.FC = () => {
                                 <div className="flex flex-col">
                                     <p className="font-16">Prediksi Return</p>
                                     <p className="font-32 fw-600">
-                                        Rp
+                                        Rp{" "}
                                         {formatNumber(
                                             predictionData?.profit_gold ?? 0,
                                         )}
