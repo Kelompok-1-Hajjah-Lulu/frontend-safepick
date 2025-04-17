@@ -1,5 +1,5 @@
-import { Modal, message, Checkbox } from "antd";
-import { useState } from "react";
+import { Modal, message, Checkbox, CheckboxChangeEvent } from "antd";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -30,7 +30,7 @@ const PredictionForm = () => {
 
     const navigate = useNavigate();
 
-    const handlePredictClick = () => {
+    const handlePredictClick = async () => {
         if (!data?.amount || !data?.tenor) {
             messageApi.warning("Please fill in all fields before submitting.");
             return;
@@ -47,14 +47,21 @@ const PredictionForm = () => {
             );
             return;
         }
-        setIsModalVisible(true);
+
+        const dontShow =
+            localStorage.getItem("dontShowPredictionModal") === "true";
+        if (dontShow) {
+            await submitPrediction();
+        } else {
+            setIsModalVisible(true);
+        }
     };
 
     const handleModalClose = () => {
         setIsModalVisible(false);
     };
 
-    const handleSubmit = async () => {
+    const submitPrediction = async () => {
         try {
             setLoading(true);
             const response = await axios.post(
@@ -83,6 +90,13 @@ const PredictionForm = () => {
         }
     };
 
+    const handleSubmit = async () => {
+        if (dontShowAgain) {
+            localStorage.setItem("dontShowPredictionModal", "true");
+        }
+        await submitPrediction();
+    };
+
     const calculateGoldGrams = (investment: number) => {
         if (investment === 0) {
             return 0;
@@ -109,6 +123,20 @@ const PredictionForm = () => {
             tenor: tenor,
         });
     };
+
+    const handleDontShowAgain = (e: CheckboxChangeEvent) => {
+        const isChecked = e.target.checked;
+        setDontShowAgain(isChecked);
+    };
+
+    useEffect(() => {
+        const dontShow =
+            localStorage.getItem("dontShowPredictionModal") === "true";
+        setDontShowAgain(dontShow);
+        if (dontShow) {
+            setIsModalVisible(false);
+        }
+    }, []);
 
     return (
         <>
@@ -194,7 +222,7 @@ const PredictionForm = () => {
                     </p>
                     <Checkbox
                         checked={dontShowAgain}
-                        onChange={(e) => setDontShowAgain(e.target.checked)}
+                        onChange={handleDontShowAgain}
                     >
                         Jangan tampilkan lagi
                     </Checkbox>

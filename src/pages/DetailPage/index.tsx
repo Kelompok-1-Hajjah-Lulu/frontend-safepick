@@ -296,10 +296,14 @@ const DetailPage: React.FC = () => {
                 </section>
             </section>
             <section>
-                <a href={productMapping[product]?.navigateTo}>
+                <a
+                    href={productMapping[product]?.navigateTo}
+                    style={{ margin: "auto" }}
+                >
                     <Button
                         type="primary"
                         className="custom-button green"
+                        style={{ width: "fit-content" }}
                         onClick={() => {
                             navigate(
                                 productParam === "deposito"
@@ -311,11 +315,12 @@ const DetailPage: React.FC = () => {
                                         tenure: tenureAmount,
                                         recommend: recommend,
                                     },
+                                    replace: true,
                                 },
                             );
                         }}
                     >
-                        Lihat Detail {productMapping[product]?.navigationTitle}{" "}
+                        Lihat {productMapping[product]?.navigationTitle}{" "}
                         <ArrowRightOutlined />
                     </Button>
                 </a>
