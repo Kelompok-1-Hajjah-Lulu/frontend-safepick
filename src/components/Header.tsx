@@ -4,8 +4,10 @@ import "./Header.scss";
 const Header: React.FC = () => {
     return (
         <div className="header-wrapper">
-            <section className="header">
-                <img src={Logo} alt="Logo" />
+            <section className="header" style={{ zIndex: 10 }}>
+                <a href="/">
+                    <img src={Logo} alt="Logo" />
+                </a>
                 <div className="slogan">
                     <p className="font-48">
                         Mulai <strong>Aman</strong>,

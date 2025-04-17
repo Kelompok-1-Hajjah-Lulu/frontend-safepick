@@ -25,9 +25,27 @@ const PredictionForm = () => {
     const [data, setData] = useState<PredictionFormRequest>();
     const [loading, setLoading] = useState(false);
 
+    const [messageApi, contextHolder] = message.useMessage();
+
     const navigate = useNavigate();
 
     const handlePredictClick = () => {
+        if (!data?.amount || !data?.tenor) {
+            messageApi.warning("Please fill in all fields before submitting.");
+            return;
+        }
+        if (data.amount < 2000000) {
+            messageApi.warning(
+                "Please enter an investment amount greater than Rp2.000.000.",
+            );
+            return;
+        }
+        if (data.amount > 1000000000) {
+            messageApi.warning(
+                "Please enter an investment amount lower than Rp1.000.000.000.",
+            );
+            return;
+        }
         setIsModalVisible(true);
     };
 
@@ -36,11 +54,6 @@ const PredictionForm = () => {
     };
 
     const handleSubmit = async () => {
-        if (!data?.amount || !data?.tenor) {
-            message.warning("Please fill in all fields before submitting.");
-            return;
-        }
-
         try {
             setLoading(true);
             const response = await axios.post(
@@ -102,6 +115,7 @@ const PredictionForm = () => {
                 <label>Nominal Investasi</label>
                 <label>Tenor</label>
             </div>
+            {contextHolder}
 
             <div className="input-row">
                 <div
@@ -127,7 +141,20 @@ const PredictionForm = () => {
                     <input
                         type="text"
                         placeholder="Input nominal yang ingin diinvestasikan"
-                        onChange={handleInvestmentChange}
+                        onChange={(event) => {
+                            const rawValue = event.target.value.replace(
+                                /\D/g,
+                                "",
+                            );
+                            const formattedValue = `Rp ${new Intl.NumberFormat(
+                                "id-ID",
+                            ).format(parseInt(rawValue || "0"))}`;
+                            event.target.value = formattedValue;
+                            handleInvestmentChange({
+                                ...event,
+                                target: { ...event.target, value: rawValue },
+                            });
+                        }}
                     />
                 </div>
                 <select onChange={handleTenorChange}>
