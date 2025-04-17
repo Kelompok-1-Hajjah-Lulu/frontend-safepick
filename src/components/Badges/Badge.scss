@@ -22,4 +22,8 @@
     &.green {
         background-color: variables.$secondary-green-color;
     }
+    &.red {
+        background-color: #ffe7e1;
+        color: #b03111;
+    }
 }

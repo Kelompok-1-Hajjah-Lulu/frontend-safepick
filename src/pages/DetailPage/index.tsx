@@ -11,8 +11,8 @@ import DepositoIcon from "../../assets/images/deposito-icon.png";
 import Badge from "../../components/Badges/Badge";
 import PredictionCard from "./components/PredictionCard";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { Button, message } from "antd";
-import { ArrowRightOutlined } from "@ant-design/icons";
+import { Button, message, Skeleton, Spin } from "antd";
+import { ArrowRightOutlined, LoadingOutlined } from "@ant-design/icons";
 import axios from "axios";
 import { formatNumber } from "../../utils/formatNumber";
 
@@ -24,6 +24,7 @@ interface ProductDetails {
     navigationTitle: string;
 }
 
+// response
 interface PredictionData {
     gold_gram: number;
     tenure_1: TenureDetails;
@@ -73,21 +74,21 @@ const DetailPage: React.FC = () => {
 
     const location = useLocation();
     const investmentAmount = location.state.investmentAmount;
-    console.log(investmentAmount);
-    const tenureAmount = location.state.tenureAmount;
+    const tenureAmount = location.state.tenure;
+    const recommend = location.state.recommend;
 
     const getPredictionByTenure = (tenure: number) => {
         if (!data) return null;
 
         switch (tenure) {
             case 1:
-                return data.tenure_1;
+                return data.tenure_1 as TenureDetails;
             case 3:
-                return data.tenure_3;
+                return data.tenure_3 as TenureDetails;
             case 6:
-                return data.tenure_6;
+                return data.tenure_6 as TenureDetails;
             case 12:
-                return data.tenure_12;
+                return data.tenure_12 as TenureDetails;
             default:
                 return null;
         }
@@ -96,9 +97,7 @@ const DetailPage: React.FC = () => {
     useEffect(() => {
         if (productParam === "gold" || productParam === "deposito") {
             setProduct(productParam);
-            if (productParam === "gold") {
-                setIsGold(true);
-            }
+            setIsGold(productParam === "gold");
         } else {
             navigate("/404");
         }
@@ -156,95 +155,166 @@ const DetailPage: React.FC = () => {
 
             <section className="detail-wrapper">
                 <div className="header-converter">
-                    <div
-                        className="flex flex-col"
-                        style={
-                            !isGold
-                                ? { margin: "auto", textAlign: "center" }
-                                : {}
-                        }
-                    >
-                        <p className="font-24 fw-600">Nominal Investasi</p>
-                        <p className="font-24 fw-400">
-                            Rp{formatNumber(parseInt(investmentAmount))}
-                        </p>
-                    </div>
-                    {isGold && (
+                    {loading ? (
+                        <div
+                            className="flex flex-col"
+                            style={{
+                                width: "100%",
+                                display: "flex",
+                                gap: "20px",
+                                alignItems: "center",
+                            }}
+                        >
+                            <Spin
+                                indicator={<LoadingOutlined spin />}
+                                size="large"
+                            />
+                            <p className="font-24 fw-400">predicting prices</p>
+                        </div>
+                    ) : (
                         <>
-                            <div className="font-16">setara dengan</div>
-                            <div className="flex flex-col">
-                                <p className="font-24 fw-600">Gram Emas</p>
+                            <div
+                                className="flex flex-col"
+                                style={
+                                    !isGold
+                                        ? {
+                                              margin: "auto",
+                                              textAlign: "center",
+                                          }
+                                        : {}
+                                }
+                            >
+                                <p className="font-24 fw-600">
+                                    Nominal Investasi
+                                </p>
                                 <p className="font-24 fw-400">
-                                    {data?.gold_gram} gram
+                                    Rp{formatNumber(parseInt(investmentAmount))}
                                 </p>
                             </div>
+                            {isGold && (
+                                <>
+                                    <div className="font-16">setara dengan</div>
+                                    <div className="flex flex-col">
+                                        <p className="font-24 fw-600">
+                                            Gram Emas
+                                        </p>
+                                        <p className="font-24 fw-400">
+                                            {data?.gold_gram} gram
+                                        </p>
+                                    </div>
+                                </>
+                            )}
                         </>
                     )}
                 </div>
-                <BaseCard isRecommendation>
-                    <h1>{productMapping[product]?.title}</h1>
-                    <div className="detail-container">
-                        <img
-                            className="card-icon"
-                            src={isGold ? GoldIcon : DepositoIcon}
-                            alt="Gold Icon"
-                        />
-                        <div className="inner-container">
-                            <div className="left-container">
-                                <div className="flex-flex-col">
-                                    <p className="font-16 fw-300">
-                                        Jangka Waktu
-                                    </p>
-                                    <p className="font-16 fw-600">
-                                        {tenureAmount} Bulan
-                                    </p>
-                                </div>
-                                {isGold && (
-                                    <div className="flex-flex-col">
-                                        <p className="font-16 fw-300">
-                                            Harga Buy Back
-                                        </p>
-                                        <p className="font-16 fw-600">
-                                            Rp
-                                            {
-                                                getPredictionByTenure(
-                                                    tenureAmount,
-                                                )?.predicted_buyback
-                                            }
-                                        </p>
+                <BaseCard
+                    isRecommendation={
+                        recommend ===
+                        (productParam === "deposito" ? "deposit" : productParam)
+                    }
+                >
+                    {loading ? (
+                        <Skeleton active />
+                    ) : (
+                        <>
+                            <h1>{productMapping[product]?.title}</h1>
+                            <div className="detail-container">
+                                <img
+                                    className="card-icon"
+                                    src={isGold ? GoldIcon : DepositoIcon}
+                                    alt="Gold Icon"
+                                />
+                                <div className="inner-container">
+                                    <div className="left-container">
+                                        <div className="flex-flex-col">
+                                            <p className="font-16 fw-300">
+                                                Jangka Waktu
+                                            </p>
+                                            <p className="font-16 fw-600">
+                                                {tenureAmount} Bulan
+                                            </p>
+                                        </div>
+                                        {isGold && (
+                                            <div className="flex-flex-col">
+                                                <p className="font-16 fw-300">
+                                                    Harga Buy Back
+                                                </p>
+                                                <p className="font-16 fw-600">
+                                                    Rp
+                                                    {formatNumber(
+                                                        getPredictionByTenure(
+                                                            tenureAmount,
+                                                        )?.predicted_buyback ||
+                                                            0,
+                                                    )}
+                                                </p>
+                                            </div>
+                                        )}
                                     </div>
-                                )}
-                            </div>
-                            <div className="divider"></div>
-                            <div className="right-container">
-                                <div className="flex-flex-col">
-                                    <p className="font-16 fw-300">
-                                        Prediksi Return
-                                    </p>
-                                    <p className="font-32 fw-600">
-                                        Rp
-                                        {
-                                            getPredictionByTenure(tenureAmount)
-                                                ?.predicted_gold_price
-                                        }
-                                    </p>
+                                    <div className="divider"></div>
+                                    <div className="right-container">
+                                        <div className="flex-flex-col">
+                                            <p className="font-16 fw-300">
+                                                Prediksi Return
+                                            </p>
+                                            <p className="font-32 fw-600">
+                                                Rp
+                                                {formatNumber(
+                                                    isGold
+                                                        ? getPredictionByTenure(
+                                                              tenureAmount,
+                                                          )?.profit_gold || 0
+                                                        : getPredictionByTenure(
+                                                              tenureAmount,
+                                                          )?.profit_deposit ||
+                                                              0,
+                                                )}
+                                            </p>
+                                        </div>
+                                        <Badge
+                                            text={
+                                                isGold
+                                                    ? getPredictionByTenure(
+                                                          tenureAmount,
+                                                      )?.gold_return_rate
+                                                    : getPredictionByTenure(
+                                                          tenureAmount,
+                                                      )?.deposit_return_rate
+                                            }
+                                            color="green"
+                                        />
+                                    </div>
                                 </div>
-                                <Badge text={20} color="green" />
+                                <div></div>
                             </div>
-                        </div>
-                        <div></div>
-                    </div>
+                        </>
+                    )}
                 </BaseCard>
                 <p className="fw-600 font-20">Coba pilihan lain</p>
                 <section className="return-prediction">
-                    <PredictionCard />
-                    <PredictionCard />
-                    <PredictionCard />
+                    {handlePredictionCard(tenureAmount, data!, isGold)}
                 </section>
             </section>
             <section>
                 <a href={productMapping[product]?.navigateTo}>
-                    <Button type="primary" className="custom-button green">
+                    <Button
+                        type="primary"
+                        className="custom-button green"
+                        onClick={() => {
+                            navigate(
+                                productParam === "deposito"
+                                    ? "/calculation/gold"
+                                    : "/calculation/deposito",
+                                {
+                                    state: {
+                                        investmentAmount: investmentAmount,
+                                        tenure: tenureAmount,
+                                        recommend: recommend,
+                                    },
+                                },
+                            );
+                        }}
+                    >
                         Lihat Detail {productMapping[product]?.navigationTitle}{" "}
                         <ArrowRightOutlined />
                     </Button>
@@ -259,3 +329,42 @@ const DetailPage: React.FC = () => {
 };
 
 export default DetailPage;
+
+const handlePredictionCard = (
+    tenureAmount: number,
+    data: PredictionData,
+    isGold: boolean,
+) => {
+    const filteredTenures = Object.entries(data || {})
+        .filter(
+            ([key, value]) =>
+                key.startsWith("tenure_") && value.tenure !== tenureAmount,
+        )
+        .map(([_, value]) => value as TenureDetails)
+        .sort((a, b) =>
+            isGold
+                ? b.profit_gold - a.profit_gold
+                : b.profit_deposit - a.profit_deposit,
+        );
+
+    return (
+        <>
+            {filteredTenures.map((data, index) => (
+                <PredictionCard
+                    key={index}
+                    hargaBuyback={isGold ? data.predicted_buyback : 0}
+                    prediksiReturnPersen={
+                        isGold
+                            ? data.gold_return_rate
+                            : data.deposit_return_rate
+                    }
+                    prediksiReturnRupiah={
+                        isGold ? data.profit_gold : data.profit_deposit
+                    }
+                    tenure={data.tenure}
+                    jangkaWaktu={0}
+                />
+            ))}
+        </>
+    );
+};
