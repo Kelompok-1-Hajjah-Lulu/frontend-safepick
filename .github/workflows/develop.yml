@@ -47,4 +47,4 @@ jobs:
             ${{ secrets.DOCKERHUB_USERNAME }}/safepick-frontend:staging
 
       - name: Clean Unused Images
-        run: docker image prune -y
+        run: docker image prune
