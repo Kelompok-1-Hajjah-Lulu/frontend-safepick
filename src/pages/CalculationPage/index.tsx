@@ -57,7 +57,9 @@ const CalculationPage: React.FC = () => {
                 <PredictionForm />
             </section> */}
             <section className="calculation-card-wrapper">
-                <BaseCard isRecommendation>
+                <BaseCard
+                    isRecommendation={predictionData.recommend === "gold"}
+                >
                     <div className="wrapper-prediksi-container">
                         <img
                             className="card-icon"
@@ -72,8 +74,7 @@ const CalculationPage: React.FC = () => {
                                     <p className="font-32 fw-600">
                                         Rp
                                         {formatNumber(
-                                            predictionData?.predicted_gold_price ??
-                                                0,
+                                            predictionData?.profit_gold ?? 0,
                                         )}
                                     </p>
                                 </div>
@@ -90,6 +91,7 @@ const CalculationPage: React.FC = () => {
                                         state: {
                                             investmentAmount: investmentAmount,
                                             tenure: tenureAmount,
+                                            recommend: predictionData.recommend,
                                         },
                                     });
                                 }}
@@ -99,7 +101,9 @@ const CalculationPage: React.FC = () => {
                         </div>
                     </div>
                 </BaseCard>
-                <BaseCard>
+                <BaseCard
+                    isRecommendation={predictionData.recommend === "deposit"}
+                >
                     <div className="wrapper-prediksi-container">
                         <img
                             className="card-icon"
@@ -131,6 +135,7 @@ const CalculationPage: React.FC = () => {
                                         state: {
                                             investmentAmount: investmentAmount,
                                             tenure: tenureAmount,
+                                            recommend: predictionData.recommend,
                                         },
                                     });
                                 }}

@@ -1,38 +1,47 @@
 import Badge from "../../../components/Badges/Badge";
+import { formatNumber } from "../../../utils/formatNumber";
 
 import "./PredictionCard.scss";
 
 interface PredictionCardProps {
-    jangkaWaktu?: string;
-    hargaBuyback?: string;
-    prediksiReturnRupiah?: string;
-    prediksiReturnPersen?: string;
+    jangkaWaktu: number;
+    hargaBuyback: number;
+    prediksiReturnRupiah: number;
+    prediksiReturnPersen: number;
+    tenure: number;
 }
 
-const PredictionCard = ({}: // jangkaWaktu,
-// hargaBuyback,
-// prediksiReturnRupiah,
-// prediksiReturnPersen,
-PredictionCardProps) => {
+const PredictionCard = ({
+    hargaBuyback = 0,
+    prediksiReturnRupiah,
+    prediksiReturnPersen,
+    tenure,
+}: PredictionCardProps) => {
     return (
         <div className="prediction-card">
             <div className="left-container">
                 <div className="flex-flex-col">
                     <p className="font-16 fw-300">Jangka Waktu</p>
-                    <p className="font-16 fw-600">12 Bulan</p>
+                    <p className="font-16 fw-600">{tenure} Bulan</p>
                 </div>
-                <div className="flex-flex-col">
-                    <p className="font-16 fw-300">Harga Buy Back</p>
-                    <p className="font-16 fw-600">Rp2.000.000</p>
-                </div>
+                {hargaBuyback !== 0 && (
+                    <div className="flex-flex-col">
+                        <p className="font-16 fw-300">Harga Buy Back</p>
+                        <p className="font-16 fw-600">
+                            Rp{formatNumber(hargaBuyback)}
+                        </p>
+                    </div>
+                )}
             </div>
             <div className="divider"></div>
             <div className="right-container">
                 <div className="flex-flex-col">
                     <p className="font-16 fw-300">Prediksi Return</p>
-                    <p className="font-32 fw-600">Rp2.000.000</p>
+                    <p className="font-32 fw-600">
+                        Rp{formatNumber(prediksiReturnRupiah!)}
+                    </p>
                 </div>
-                <Badge text="25%" color="green" />
+                <Badge text={prediksiReturnPersen} color="green" />
             </div>
         </div>
     );
