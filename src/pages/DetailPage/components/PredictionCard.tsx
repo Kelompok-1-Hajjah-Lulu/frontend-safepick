@@ -24,13 +24,19 @@ const PredictionCard = ({
                     <p className="font-16 fw-300">Jangka Waktu</p>
                     <p className="font-16 fw-600">{tenure} Bulan</p>
                 </div>
-                {hargaBuyback !== 0 && (
+                {hargaBuyback !== 0 ? (
                     <div className="flex-flex-col">
                         <p className="font-16 fw-300">Harga Buy Back</p>
                         <p className="font-16 fw-600">
                             Rp{formatNumber(hargaBuyback)}
                         </p>
                     </div>
+                ) : (
+                    tenure === 12 && (
+                        <p className="font-14">
+                            Hanya dapat dibuka di kantor cabang
+                        </p>
+                    )
                 )}
             </div>
             <div className="divider"></div>

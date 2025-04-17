@@ -17,19 +17,19 @@ import { formatNumber } from "../../utils/formatNumber";
 
 const CalculationPage: React.FC = () => {
     const location = useLocation();
-    const predictionData: PredictionResponse = location.state
-        .prediction as PredictionResponse;
+    const predictionData: PredictionResponse | null = location.state
+        ?.prediction as PredictionResponse | null;
 
-    const investmentAmount = location.state.investment;
-    const tenureAmount = location.state.tenure;
+    const investmentAmount = location.state?.investment;
+    const tenureAmount = location.state?.tenure;
 
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (!predictionData) {
+        if (!location.state || !predictionData) {
             navigate("/");
         }
-    }, [predictionData, navigate]);
+    }, [location.state, predictionData, navigate]);
     return (
         <>
             <section className="header-calculation-page">
@@ -58,7 +58,7 @@ const CalculationPage: React.FC = () => {
             </section> */}
             <section className="calculation-card-wrapper">
                 <BaseCard
-                    isRecommendation={predictionData.recommend === "gold"}
+                    isRecommendation={predictionData?.recommend === "gold"}
                 >
                     <div className="wrapper-prediksi-container">
                         <img
@@ -91,7 +91,8 @@ const CalculationPage: React.FC = () => {
                                         state: {
                                             investmentAmount: investmentAmount,
                                             tenure: tenureAmount,
-                                            recommend: predictionData.recommend,
+                                            recommend:
+                                                predictionData?.recommend,
                                         },
                                     });
                                 }}
@@ -102,7 +103,7 @@ const CalculationPage: React.FC = () => {
                     </div>
                 </BaseCard>
                 <BaseCard
-                    isRecommendation={predictionData.recommend === "deposit"}
+                    isRecommendation={predictionData?.recommend === "deposit"}
                 >
                     <div className="wrapper-prediksi-container">
                         <img
@@ -135,7 +136,8 @@ const CalculationPage: React.FC = () => {
                                         state: {
                                             investmentAmount: investmentAmount,
                                             tenure: tenureAmount,
-                                            recommend: predictionData.recommend,
+                                            recommend:
+                                                predictionData?.recommend,
                                         },
                                     });
                                 }}

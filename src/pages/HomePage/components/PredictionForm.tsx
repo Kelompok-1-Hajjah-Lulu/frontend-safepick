@@ -1,4 +1,4 @@
-import { Modal,message, Checkbox } from "antd";
+import { Modal, message, Checkbox } from "antd";
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -20,28 +20,41 @@ export interface PredictionResponse {
 }
 
 const PredictionForm = () => {
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  const [dontShowAgain, setDontShowAgain] = useState(false);
-      const [goldGram, setGoldGram] = useState<number>(0);
+    const [isModalVisible, setIsModalVisible] = useState(false);
+    const [dontShowAgain, setDontShowAgain] = useState(false);
+    const [goldGram, setGoldGram] = useState<number>(0);
     const [data, setData] = useState<PredictionFormRequest>();
     const [loading, setLoading] = useState(false);
 
+    const [messageApi, contextHolder] = message.useMessage();
+
     const navigate = useNavigate();
 
-  const handlePredictClick = () => {
-    setIsModalVisible(true);
-  };
+    const handlePredictClick = () => {
+        if (!data?.amount || !data?.tenor) {
+            messageApi.warning("Please fill in all fields before submitting.");
+            return;
+        }
+        if (data.amount < 2000000) {
+            messageApi.warning(
+                "Please enter an investment amount greater than Rp2.000.000.",
+            );
+            return;
+        }
+        if (data.amount > 1000000000) {
+            messageApi.warning(
+                "Please enter an investment amount lower than Rp1.000.000.000.",
+            );
+            return;
+        }
+        setIsModalVisible(true);
+    };
 
     const handleModalClose = () => {
         setIsModalVisible(false);
     };
 
     const handleSubmit = async () => {
-        if (!data?.amount || !data?.tenor) {
-            message.warning("Please fill in all fields before submitting.");
-            return;
-        }
-
         try {
             setLoading(true);
             const response = await axios.post(
@@ -103,6 +116,7 @@ const PredictionForm = () => {
                 <label>Nominal Investasi</label>
                 <label>Tenor</label>
             </div>
+            {contextHolder}
 
             <div className="input-row">
                 <div
@@ -128,7 +142,20 @@ const PredictionForm = () => {
                     <input
                         type="text"
                         placeholder="Input nominal yang ingin diinvestasikan"
-                        onChange={handleInvestmentChange}
+                        onChange={(event) => {
+                            const rawValue = event.target.value.replace(
+                                /\D/g,
+                                "",
+                            );
+                            const formattedValue = `Rp ${new Intl.NumberFormat(
+                                "id-ID",
+                            ).format(parseInt(rawValue || "0"))}`;
+                            event.target.value = formattedValue;
+                            handleInvestmentChange({
+                                ...event,
+                                target: { ...event.target, value: rawValue },
+                            });
+                        }}
                     />
                 </div>
                 <select onChange={handleTenorChange}>
@@ -153,25 +180,28 @@ const PredictionForm = () => {
                 okButtonProps={{ loading: loading }}
                 cancelButtonProps={{ style: { display: "none" } }}
             >
-            <div className="modal-body-wrapper">
-                <p>
-                Rekomendasi dari <span className="highlight-orange">SAFEPICK</span> bersifat <strong>prediksi</strong> dan tidak menjamin hasil pasti.
-                </p>
-                <p>
-                Keputusan dan <strong>risiko</strong> investasi sepenuhnya menjadi <strong>tanggung jawab pengguna</strong>.
-                </p>
-                <Checkbox
-                checked={dontShowAgain}
-                onChange={(e) => setDontShowAgain(e.target.checked)}
-                >
-                Jangan tampilkan lagi
-                </Checkbox>
-            </div>
-        </Modal>
-
-
-    </>
-  );
+                <div className="modal-body-wrapper">
+                    <p>
+                        Rekomendasi dari{" "}
+                        <span className="highlight-orange">SAFEPICK</span>{" "}
+                        bersifat <strong>prediksi</strong> dan tidak menjamin
+                        hasil pasti.
+                    </p>
+                    <p>
+                        Keputusan dan <strong>risiko</strong> investasi
+                        sepenuhnya menjadi{" "}
+                        <strong>tanggung jawab pengguna</strong>.
+                    </p>
+                    <Checkbox
+                        checked={dontShowAgain}
+                        onChange={(e) => setDontShowAgain(e.target.checked)}
+                    >
+                        Jangan tampilkan lagi
+                    </Checkbox>
+                </div>
+            </Modal>
+        </>
+    );
 };
 
 export default PredictionForm;

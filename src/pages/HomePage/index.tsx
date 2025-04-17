@@ -44,7 +44,7 @@ const HomePage: React.FC = () => {
                     </p>
                     <p>
                         Minimal pembelian emas untuk Tabungan E-Mas mulai dari
-                        0.1 gram
+                        0.05 gram
                     </p>
 
                     <div className="price-row">
