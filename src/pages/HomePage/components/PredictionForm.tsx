@@ -1,4 +1,4 @@
-import { message, Modal } from "antd";
+import { Modal,message, Checkbox } from "antd";
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -20,16 +20,17 @@ export interface PredictionResponse {
 }
 
 const PredictionForm = () => {
-    const [isModalVisible, setIsModalVisible] = useState(false);
-    const [goldGram, setGoldGram] = useState<number>(0);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [dontShowAgain, setDontShowAgain] = useState(false);
+      const [goldGram, setGoldGram] = useState<number>(0);
     const [data, setData] = useState<PredictionFormRequest>();
     const [loading, setLoading] = useState(false);
 
     const navigate = useNavigate();
 
-    const handlePredictClick = () => {
-        setIsModalVisible(true);
-    };
+  const handlePredictClick = () => {
+    setIsModalVisible(true);
+  };
 
     const handleModalClose = () => {
         setIsModalVisible(false);
@@ -152,17 +153,25 @@ const PredictionForm = () => {
                 okButtonProps={{ loading: loading }}
                 cancelButtonProps={{ style: { display: "none" } }}
             >
+            <div className="modal-body-wrapper">
                 <p>
-                    Rekomendasi dari <strong>SAFEPICK</strong> bersifat{" "}
-                    <strong>prediksi</strong> dan tidak menjamin hasil pasti.
+                Rekomendasi dari <span className="highlight-orange">SAFEPICK</span> bersifat <strong>prediksi</strong> dan tidak menjamin hasil pasti.
                 </p>
                 <p>
-                    Keputusan dan <strong>risiko</strong> investasi sepenuhnya
-                    menjadi <strong>tanggung jawab pengguna</strong>.
+                Keputusan dan <strong>risiko</strong> investasi sepenuhnya menjadi <strong>tanggung jawab pengguna</strong>.
                 </p>
-            </Modal>
-        </>
-    );
+                <Checkbox
+                checked={dontShowAgain}
+                onChange={(e) => setDontShowAgain(e.target.checked)}
+                >
+                Jangan tampilkan lagi
+                </Checkbox>
+            </div>
+        </Modal>
+
+
+    </>
+  );
 };
 
 export default PredictionForm;

@@ -244,3 +244,84 @@
         }
     }
 }
+
+.prediction-modal {
+  .ant-modal {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+    transform: translate(-50%, -50%);
+    padding: 0;
+  }
+
+  .ant-modal-content {
+    border-radius: 16px;
+    padding: 2rem 2.5rem;
+    width: 70vw !important;         
+    max-width: 900px !important;    
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
+
+  .modal-title-custom {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 1.5rem;
+
+    img {
+      width: 28px;
+      height: 28px;
+      flex-shrink: 0;
+    }
+
+    span {
+      font-size: 15px;
+      font-weight: 700;
+      color: variables.$text-color;
+      line-height: 1; 
+    }
+  }
+
+  .modal-body-wrapper {
+    margin-left: 40px; 
+  }
+
+  .ant-modal-body {
+    padding-top: 0;
+
+    p {
+      font-size: 15px;
+      font-weight: 400;
+      margin-bottom: 0.6rem;
+    }
+
+    .highlight-orange {
+      font-weight: bold;
+      color: #f4a300;
+    }
+
+    .ant-checkbox-wrapper {
+      margin-top: 0.5rem;
+      font-size: 13px;
+      .ant-checkbox-checked {
+        background-color: #00898b !important;
+        border-color: #00898b !important;
+      }
+    }
+  }
+
+  .ant-btn-primary {
+    background-color: variables.$green-color;
+    border-radius: 10px;
+    font-weight: 600;
+    padding: 6px 24px;
+    font-size: 14px;
+    margin-top: 1rem;
+
+    &:hover {
+      background-color: color.adjust(variables.$green-color, $lightness: -10%);
+    }
+  }
+}
