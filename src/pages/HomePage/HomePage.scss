@@ -3,18 +3,20 @@
 
 .homepage {
     .tagline {
-        font-size: 13px;
         color: white;
-        margin-top: 0.5rem;
+        margin-block: 0.5rem;
         border-bottom: 2px solid white;
+        width: fit-content;
         display: inline-block;
-        max-width: 370px;
+        @media (max-width: 768px) {
+            border: none;
+            margin-bottom: 2rem;
+        }
     }
 
     .subtext {
-        font-size: 15px;
         color: white;
-        max-width: 600px;
+        width: 80%;
         margin-bottom: 1rem;
 
         strong {
@@ -28,73 +30,79 @@
 
     .input-section {
         width: 100%;
-        max-width: 800px;
 
-        .label-row {
-            display: flex;
-            justify-content: space-between;
-            font-size: 15px;
-            font-weight: 600;
-            color: white;
-            margin-bottom: 0.5rem;
+        .input-wrapper-section {
+            background-color: white;
+            padding: 30px;
+            box-shadow: 4px 4px 40px 0px #00000040;
+            border-radius: 20px;
 
-            label {
-                flex: 1;
-                text-align: left;
+            .input-row {
+                display: flex;
+                gap: 1rem;
+                margin-bottom: 1rem;
+                width: 100%;
+                flex-wrap: wrap;
 
-                &:last-child {
-                    text-align: left;
-                    padding-left: 20px;
+                label {
+                    color: black;
+                }
+
+                input,
+                select {
+                    flex: 1;
+                    padding: 0.75rem 1rem;
+                    font-size: 13px;
+                    border-radius: 15px;
+                    border: none;
+                    outline: none;
+                    background-color: white;
+                    box-shadow: 0 0px 4px rgba(0, 0, 0, 0.1);
+                    min-width: 250px;
+                    color: grey;
+                }
+
+                select {
+                    appearance: none;
+                    background-image: url('data:image/svg+xml;charset=US-ASCII,<svg fill="%23999" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+                    background-repeat: no-repeat;
+                    background-position: right 0.75rem center;
+                    background-size: 1rem;
+                }
+
+                .input-wrapper {
+                    display: flex;
+                    flex-direction: column;
+                    width: 100%;
+                    gap: 5px;
+                    flex: 1 1 300px;
+                    .label-wrapper {
+                        display: flex;
+                        width: 100%;
+                        justify-content: space-between;
+                        align-items: center;
+                    }
                 }
             }
-        }
 
-        .input-row {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-            margin-bottom: 1rem;
-
-            input,
-            select {
-                flex: 1;
-                padding: 0.75rem 1rem;
+            .btn-predict {
+                width: 100%;
+                padding: 0.75rem;
                 font-size: 13px;
-                border-radius: 15px;
+                font-weight: bold;
                 border: none;
-                outline: none;
-                background-color: white;
-                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-                min-width: 250px;
-                color: grey;
-            }
+                border-radius: 15px;
+                background-color: variables.$green-color;
+                color: white;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
 
-            select {
-                appearance: none;
-                background-image: url('data:image/svg+xml;charset=US-ASCII,<svg fill="%23999" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
-                background-repeat: no-repeat;
-                background-position: right 0.75rem center;
-                background-size: 1rem;
-            }
-        }
-
-        .btn-predict {
-            width: 100%;
-            padding: 0.75rem;
-            font-size: 13px;
-            font-weight: bold;
-            border: none;
-            border-radius: 15px;
-            background-color: variables.$green-color;
-            color: white;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-
-            &:hover {
-                background-color: color.adjust(
-                    variables.$green-color,
-                    $lightness: -10%
-                );
+                &:hover {
+                    background-color: color.adjust(
+                        variables.$green-color,
+                        $lightness: -10%
+                    );
+                }
             }
         }
 
@@ -104,7 +112,7 @@
             right: 0;
             width: 50%;
             max-width: 520px;
-            z-index: 1;
+            z-index: -1;
             pointer-events: none; // biar tidak ganggu klik
 
             @media (max-width: 768px) {
@@ -157,7 +165,7 @@
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
             padding: 1rem;
             max-width: 700px;
-            flex: 1;
+            flex: 1 1 300px;
             overflow: visible;
 
             &:hover {
@@ -195,9 +203,8 @@
             }
 
             .price-row {
-                display: grid;
-                grid-template-columns: auto 0px auto;
-                gap: 5rem;
+                display: flex;
+                gap: 2rem;
                 align-items: center;
                 justify-content: center;
 
@@ -246,82 +253,85 @@
 }
 
 .prediction-modal {
-  .ant-modal {
-    display: flex !important;
-    align-items: center;
-    justify-content: center;
-    align-self: center;
-    transform: translate(-50%, -50%);
-    padding: 0;
-  }
-
-  .ant-modal-content {
-    border-radius: 16px;
-    padding: 2rem 2.5rem;
-    width: 70vw !important;         
-    max-width: 900px !important;    
-    margin: 0 auto;
-    box-sizing: border-box;
-  }
-
-  .modal-title-custom {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 1.5rem;
-
-    img {
-      width: 28px;
-      height: 28px;
-      flex-shrink: 0;
+    .ant-modal {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        align-self: center;
+        transform: translate(-50%, -50%);
+        padding: 0;
     }
 
-    span {
-      font-size: 15px;
-      font-weight: 700;
-      color: variables.$text-color;
-      line-height: 1; 
-    }
-  }
-
-  .modal-body-wrapper {
-    margin-left: 40px; 
-  }
-
-  .ant-modal-body {
-    padding-top: 0;
-
-    p {
-      font-size: 15px;
-      font-weight: 400;
-      margin-bottom: 0.6rem;
+    .ant-modal-content {
+        border-radius: 16px;
+        padding: 2rem 2.5rem;
+        width: 70vw !important;
+        max-width: 900px !important;
+        margin: 0 auto;
+        box-sizing: border-box;
     }
 
-    .highlight-orange {
-      font-weight: bold;
-      color: #f4a300;
+    .modal-title-custom {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 1.5rem;
+
+        img {
+            width: 28px;
+            height: 28px;
+            flex-shrink: 0;
+        }
+
+        span {
+            font-size: 15px;
+            font-weight: 700;
+            color: variables.$text-color;
+            line-height: 1;
+        }
     }
 
-    .ant-checkbox-wrapper {
-      margin-top: 0.5rem;
-      font-size: 13px;
-      .ant-checkbox-checked {
-        background-color: #00898b !important;
-        border-color: #00898b !important;
-      }
+    .modal-body-wrapper {
+        margin-left: 40px;
     }
-  }
 
-  .ant-btn-primary {
-    background-color: variables.$green-color;
-    border-radius: 10px;
-    font-weight: 600;
-    padding: 6px 24px;
-    font-size: 14px;
-    margin-top: 1rem;
+    .ant-modal-body {
+        padding-top: 0;
 
-    &:hover {
-      background-color: color.adjust(variables.$green-color, $lightness: -10%);
+        p {
+            font-size: 15px;
+            font-weight: 400;
+            margin-bottom: 0.6rem;
+        }
+
+        .highlight-orange {
+            font-weight: bold;
+            color: #f4a300;
+        }
+
+        .ant-checkbox-wrapper {
+            margin-top: 0.5rem;
+            font-size: 13px;
+            .ant-checkbox-checked {
+                background-color: #00898b !important;
+                border-color: #00898b !important;
+            }
+        }
     }
-  }
+
+    .ant-btn-primary {
+        background-color: variables.$green-color;
+        border-radius: 10px;
+        font-weight: 600;
+        padding: 6px 24px;
+        font-size: 14px;
+        margin-top: 1rem;
+
+        &:hover {
+            background-color: color.adjust(
+                variables.$green-color,
+                $lightness: -10%
+            );
+        }
+    }
 }

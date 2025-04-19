@@ -49,7 +49,7 @@ const CalculationPage: React.FC = () => {
                 </div>
             </section>
             <img
-                className="mata-gede-image"
+                className="mata-gede-image desktop-only"
                 src={BusinessMonitoringImage}
                 alt="Mata Gede"
             />

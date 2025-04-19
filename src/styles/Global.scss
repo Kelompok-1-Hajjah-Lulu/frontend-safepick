@@ -51,6 +51,11 @@ button.custom-button {
     font-weight: 500;
     border: none;
     cursor: pointer;
+    &.outlined {
+        background-color: white;
+        border: 1px solid variables.$green-color;
+        color: variables.$green-color;
+    }
     &:hover {
         background-color: #00898bcf !important;
     }
@@ -60,8 +65,20 @@ button.custom-button {
 .ant-modal-title {
     font-weight: bold;
     color: #ff9900;
-  }
-  
-  .ant-modal-body p {
+}
+
+.ant-modal-body p {
     margin-bottom: 0.5rem;
-  }
+}
+
+.desktop-only {
+    @media (max-width: 768px) {
+        display: none;
+    }
+}
+
+.mobile-only {
+    @media (min-width: 769px) {
+        display: none;
+    }
+}
