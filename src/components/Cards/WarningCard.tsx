@@ -12,7 +12,7 @@ const WarningCard = () => {
                     <span className="gold fw-800">SAFEPICK</span> bersifat{" "}
                     <span className="fw-600">prediksi</span> dan tidak menjamin
                     hasil pasti. Keputusan dan{" "}
-                    <span className="fw-600">risiko</span>
+                    <span className="fw-600">risiko </span>
                     investasi sepenuhnya{" "}
                     <span className="fw-600">
                         menjadi tanggung jawab pengguna.
