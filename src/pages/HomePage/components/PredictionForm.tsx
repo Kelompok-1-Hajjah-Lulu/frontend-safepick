@@ -140,64 +140,64 @@ const PredictionForm = () => {
 
     return (
         <>
-            <div className="label-row">
-                <label>Nominal Investasi</label>
-                <label>Tenor</label>
-            </div>
             {contextHolder}
 
-            <div className="input-row">
-                <div
-                    className="input-wrapper"
-                    style={{ position: "relative", display: "flex", flex: 1 }}
-                >
-                    {goldGram !== 0 && !Number.isNaN(goldGram) && (
-                        <p
-                            className="font-14 fw-300"
-                            style={{
-                                marginTop: "-12px",
-                                marginBottom: "20px",
-                                position: "absolute",
-                                top: "-15px",
-                                right: "0",
-                                color: "white",
+            <div className="input-wrapper-section">
+                <div className="input-row">
+                    <div
+                        className="input-wrapper"
+                        style={{ position: "relative" }}
+                    >
+                        <div className="label-wrapper">
+                            <label>Nominal Investasi</label>
+                            {goldGram !== 0 && !Number.isNaN(goldGram) && (
+                                <p className="font-14 fw-300">
+                                    Setara dengan{" "}
+                                    <span className="fw-600">
+                                        {goldGram} Gram
+                                    </span>{" "}
+                                    emas
+                                </p>
+                            )}
+                        </div>
+                        <input
+                            type="text"
+                            placeholder="Input nominal yang ingin diinvestasikan"
+                            onChange={(event) => {
+                                const rawValue = event.target.value.replace(
+                                    /\D/g,
+                                    "",
+                                );
+                                const formattedValue = `Rp ${new Intl.NumberFormat(
+                                    "id-ID",
+                                ).format(parseInt(rawValue || "0"))}`;
+                                event.target.value = formattedValue;
+                                handleInvestmentChange({
+                                    ...event,
+                                    target: {
+                                        ...event.target,
+                                        value: rawValue,
+                                    },
+                                });
                             }}
-                        >
-                            Setara dengan{" "}
-                            <span className="fw-600">{goldGram} Gram</span> emas
-                        </p>
-                    )}
-                    <input
-                        type="text"
-                        placeholder="Input nominal yang ingin diinvestasikan"
-                        onChange={(event) => {
-                            const rawValue = event.target.value.replace(
-                                /\D/g,
-                                "",
-                            );
-                            const formattedValue = `Rp ${new Intl.NumberFormat(
-                                "id-ID",
-                            ).format(parseInt(rawValue || "0"))}`;
-                            event.target.value = formattedValue;
-                            handleInvestmentChange({
-                                ...event,
-                                target: { ...event.target, value: rawValue },
-                            });
-                        }}
-                    />
+                        />
+                    </div>
+                    <div className="input-wrapper">
+                        <label>Jangka Waktu</label>
+                        <select onChange={handleTenorChange}>
+                            <option>Pilih Jangka Waktu</option>
+                            <option value="1">1 Bulan</option>
+                            <option value="3">3 Bulan</option>
+                            <option value="6">6 Bulan</option>
+                            <option value="12">12 Bulan</option>
+                        </select>
+                    </div>
                 </div>
-                <select onChange={handleTenorChange}>
-                    <option>Pilih Jangka Waktu</option>
-                    <option value="1">1 Bulan</option>
-                    <option value="3">3 Bulan</option>
-                    <option value="6">6 Bulan</option>
-                    <option value="12">12 Bulan</option>
-                </select>
-            </div>
 
-            <button className="btn-predict" onClick={handlePredictClick}>
-                Prediksi Keuntungan
-            </button>
+                <button className="btn-predict" onClick={handlePredictClick}>
+                    Prediksi Keuntungan
+                </button>
+            </div>
 
             <Modal
                 title="⚠️ Perhatian"

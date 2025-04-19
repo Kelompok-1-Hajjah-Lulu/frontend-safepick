@@ -5,11 +5,15 @@ import PredictionForm from "./components/PredictionForm";
 const HomePage: React.FC = () => {
     return (
         <section className="homepage">
-            <p className="tagline">
-                Baru mau mulai investasi tapi bingung harus ke mana?
+            <p className="tagline font-24 desktop-only">
+                Ingin mulai{" "}
+                <span className="fw-900" style={{ color: "#FFF5CD" }}>
+                    INVESTASI
+                </span>{" "}
+                tapi bingung harus ke mana?
             </p>
 
-            <p className="subtext">
+            <p className="subtext font-32 desktop-only">
                 Cukup isi <strong>nominal investasi</strong> dan{" "}
                 <strong>jangka waktu</strong>, kami kasih{" "}
                 <span className="highlight">rekomendasi</span> yang tepat,
@@ -21,7 +25,7 @@ const HomePage: React.FC = () => {
                 <img
                     src="/icons/illustration-home.png"
                     alt="Ilustrasi investasi"
-                    className="homepage-illustration"
+                    className="homepage-illustration desktop-only"
                 />
             </div>
 
@@ -31,11 +35,6 @@ const HomePage: React.FC = () => {
 
             <div className="product-cards">
                 <div className="product-card emas">
-                    <img
-                        src="/icons/star-decor.png"
-                        alt="bintang"
-                        className="icon-decor star"
-                    />
                     <h4>Tabungan E-Mas</h4>
                     <p>
                         Fasilitas menabung berbasis rekening dengan akad
@@ -46,6 +45,11 @@ const HomePage: React.FC = () => {
                         Minimal pembelian emas untuk Tabungan E-Mas mulai dari
                         0.05 gram
                     </p>
+                    <img
+                        src="/icons/star-decor.png"
+                        alt="bintang"
+                        className="icon-decor star desktop-only"
+                    />
 
                     <div className="price-row">
                         <div className="price-block">
@@ -64,16 +68,16 @@ const HomePage: React.FC = () => {
                 </div>
 
                 <div className="product-card deposito">
-                    <img
-                        src="/icons/graph-decor.png"
-                        alt="grafik"
-                        className="icon-decor graph"
-                    />
                     <h4>Deposito</h4>
                     <p>
                         Fasilitas investasi jangka waktu tertentu dengan akad
                         Mudharabah Muthlaqah.
                     </p>
+                    <img
+                        src="/icons/graph-decor.png"
+                        alt="grafik"
+                        className="icon-decor graph desktop-only"
+                    />
                     <ul className="custom-list">
                         <li>
                             <img src="/icons/checkmark.png" alt="check" />

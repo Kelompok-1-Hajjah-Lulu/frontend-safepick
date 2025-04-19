@@ -21,13 +21,13 @@ const PredictionCard = ({
         <div className="prediction-card">
             <div className="left-container">
                 <div className="flex-flex-col">
-                    <p className="font-16 fw-300">Jangka Waktu</p>
-                    <p className="font-16 fw-600">{tenure} Bulan</p>
+                    <p className="font-18 fw-300">Jangka Waktu</p>
+                    <p className="font-24 fw-600">{tenure} Bulan</p>
                 </div>
                 {hargaBuyback !== 0 ? (
                     <div className="flex-flex-col">
-                        <p className="font-16 fw-300">Harga Buy Back</p>
-                        <p className="font-16 fw-600">
+                        <p className="font-18 fw-300">Harga Buy Back</p>
+                        <p className="font-24 fw-600">
                             Rp{formatNumber(hargaBuyback)}
                         </p>
                     </div>
@@ -42,7 +42,7 @@ const PredictionCard = ({
             <div className="divider"></div>
             <div className="right-container">
                 <div className="flex-flex-col">
-                    <p className="font-16 fw-300">Prediksi Return</p>
+                    <p className="font-18 fw-300">Prediksi Return</p>
                     <p className="font-32 fw-600">
                         Rp{formatNumber(prediksiReturnRupiah!)}
                     </p>

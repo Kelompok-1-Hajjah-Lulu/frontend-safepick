@@ -15,6 +15,7 @@ import { Button, message, Skeleton, Spin } from "antd";
 import { ArrowRightOutlined, LoadingOutlined } from "@ant-design/icons";
 import axios from "axios";
 import { formatNumber } from "../../utils/formatNumber";
+import ModalFormPengajuan from "../../components/Modals/ModalFormPengajuan";
 
 interface ProductDetails {
     title: string;
@@ -48,7 +49,7 @@ const productMapping: Record<string, ProductDetails> = {
         title: "Tabungan E-Mas",
         icon: GoldIcon,
         description:
-            "Berdasarkan kalkulasi kami, berikut adalah keuntungan yang akan Anda dapatkan jika berinvestasi melalui Tabungan E-Mas",
+            "Berikut adalah keuntungan yang akan Anda dapatkan dengan investasi melalui Tabungan E-Mas",
         navigateTo: "/calculation/deposito",
         navigationTitle: "Deposito",
     },
@@ -56,7 +57,7 @@ const productMapping: Record<string, ProductDetails> = {
         title: "Deposito",
         icon: DepositoIcon,
         description:
-            "Berdasarkan kalkulasi kami, berikut adalah keuntungan yang akan Anda dapatkan jika berinvestasi melalui Deposito",
+            "Berikut adalah keuntungan yang akan Anda dapatkan dengan investasi melalui Deposito",
         navigateTo: "/calculation/gold",
         navigationTitle: "Tabungan E-Mas",
     },
@@ -76,6 +77,13 @@ const DetailPage: React.FC = () => {
     const investmentAmount = location.state.investmentAmount;
     const tenureAmount = location.state.tenure;
     const recommend = location.state.recommend;
+
+    const [isModalFormPengajuanOpen, setIsModalFormPengajuanOpen] =
+        useState(false);
+
+    const showModal = () => {
+        setIsModalFormPengajuanOpen(true);
+    };
 
     const getPredictionByTenure = (tenure: number) => {
         if (!data) return null;
@@ -142,7 +150,7 @@ const DetailPage: React.FC = () => {
                     <h1 className="font-24 text-white">
                         {productMapping[product]?.title}
                     </h1>
-                    <p className="font-18 text-white">
+                    <p className="font-24 text-white">
                         {productMapping[product]?.description}
                     </p>
                 </div>
@@ -212,12 +220,12 @@ const DetailPage: React.FC = () => {
                         recommend ===
                         (productParam === "deposito" ? "deposit" : productParam)
                     }
+                    style={{ maxWidth: "1200px", margin: "auto" }}
                 >
                     {loading ? (
                         <Skeleton active />
                     ) : (
                         <>
-                            <h1>{productMapping[product]?.title}</h1>
                             <div className="detail-container">
                                 <img
                                     className="card-icon"
@@ -225,21 +233,22 @@ const DetailPage: React.FC = () => {
                                     alt="Gold Icon"
                                 />
                                 <div className="inner-container">
+                                    <h1>{productMapping[product]?.title}</h1>
                                     <div className="left-container">
-                                        <div className="flex-flex-col">
-                                            <p className="font-16 fw-300">
+                                        <div className="flex flex-col">
+                                            <p className="font-24 fw-300">
                                                 Jangka Waktu
                                             </p>
-                                            <p className="font-16 fw-600">
+                                            <p className="font-24 fw-600">
                                                 {tenureAmount} Bulan
                                             </p>
                                         </div>
                                         {isGold && (
-                                            <div className="flex-flex-col">
-                                                <p className="font-16 fw-300">
+                                            <div className="flex flex-col">
+                                                <p className="font-24 fw-300">
                                                     Harga Buy Back
                                                 </p>
-                                                <p className="font-16 fw-600">
+                                                <p className="font-24 fw-600">
                                                     Rp
                                                     {formatNumber(
                                                         getPredictionByTenure(
@@ -254,10 +263,10 @@ const DetailPage: React.FC = () => {
                                     <div className="divider"></div>
                                     <div className="right-container">
                                         <div className="flex-flex-col">
-                                            <p className="font-16 fw-300">
+                                            <p className="font-24 fw-300">
                                                 Prediksi Return
                                             </p>
-                                            <p className="font-32 fw-600">
+                                            <p className="font-48 fw-600">
                                                 Rp
                                                 {formatNumber(
                                                     isGold
@@ -295,40 +304,47 @@ const DetailPage: React.FC = () => {
                     {handlePredictionCard(tenureAmount, data!, isGold)}
                 </section>
             </section>
-            <section>
-                <a
-                    href={productMapping[product]?.navigateTo}
-                    style={{ margin: "auto" }}
-                >
-                    <Button
-                        type="primary"
-                        className="custom-button green"
-                        style={{ width: "fit-content" }}
-                        onClick={() => {
-                            navigate(
-                                productParam === "deposito"
-                                    ? "/calculation/gold"
-                                    : "/calculation/deposito",
-                                {
-                                    state: {
-                                        investmentAmount: investmentAmount,
-                                        tenure: tenureAmount,
-                                        recommend: recommend,
-                                    },
-                                    replace: true,
-                                },
-                            );
-                        }}
-                    >
-                        Lihat {productMapping[product]?.navigationTitle}{" "}
-                        <ArrowRightOutlined />
-                    </Button>
-                </a>
-            </section>
 
             <section className="calculation-warning-recommendation">
-                <WarningCard />
+                <div style={{ width: "100%" }}>
+                    <WarningCard />
+                </div>
+                <div className="button-wrapper-calculation">
+                    <Button className="custom-button green" onClick={showModal}>
+                        Ajukan Sekarang
+                    </Button>
+                    <a
+                        href={productMapping[product]?.navigateTo}
+                        style={{ width: "100%" }}
+                    >
+                        <Button
+                            className="custom-button green outlined"
+                            onClick={() => {
+                                navigate(
+                                    productParam === "deposito"
+                                        ? "/calculation/gold"
+                                        : "/calculation/deposito",
+                                    {
+                                        state: {
+                                            investmentAmount: investmentAmount,
+                                            tenure: tenureAmount,
+                                            recommend: recommend,
+                                        },
+                                        replace: true,
+                                    },
+                                );
+                            }}
+                        >
+                            Lihat {productMapping[product]?.navigationTitle}{" "}
+                            <ArrowRightOutlined />
+                        </Button>
+                    </a>
+                </div>
             </section>
+            <ModalFormPengajuan
+                isModalOpen={isModalFormPengajuanOpen}
+                setIsModalOpen={setIsModalFormPengajuanOpen}
+            />
         </>
     );
 };

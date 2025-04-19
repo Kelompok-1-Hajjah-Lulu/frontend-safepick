@@ -12,7 +12,10 @@
         position: absolute;
         left: 0%;
         top: 0%;
-        transform: translate(-25%, -50%);
+        transform: translate(20%, -50%);
+        @media (max-width: 980px) {
+            transform: translate(10%, -50%);
+        }
     }
 
     &.isRecommendation {
