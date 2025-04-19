@@ -67,15 +67,15 @@ const DetailPage: React.FC = () => {
     const { productParam } = useParams<{ productParam: string }>();
 
     const [product, setProduct] = useState("");
-    const [isGold, setIsGold] = useState(false);
+    const [isGold, setIsGold] = useState(false); // produk
     const navigate = useNavigate();
 
     const [data, setData] = useState<PredictionData>();
     const [loading, setLoading] = useState(false);
 
     const location = useLocation();
-    const investmentAmount = location.state.investmentAmount;
-    const tenureAmount = location.state.tenure;
+    const investmentAmount = location.state.investmentAmount; // nominal
+    const tenureAmount = location.state.tenure; // tenor
     const recommend = location.state.recommend;
 
     const [isModalFormPengajuanOpen, setIsModalFormPengajuanOpen] =
@@ -344,6 +344,9 @@ const DetailPage: React.FC = () => {
             <ModalFormPengajuan
                 isModalOpen={isModalFormPengajuanOpen}
                 setIsModalOpen={setIsModalFormPengajuanOpen}
+                isGold={isGold}
+                investmentAmount={investmentAmount}
+                tenureAmount={tenureAmount}
             />
         </>
     );
