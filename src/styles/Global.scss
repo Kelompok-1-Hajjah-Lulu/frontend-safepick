@@ -56,8 +56,14 @@ button.custom-button {
         border: 1px solid variables.$green-color;
         color: variables.$green-color;
     }
+
     &:hover {
         background-color: #00898bcf !important;
+    }
+    &.green {
+        &:hover {
+            color: white !important;
+        }
     }
 }
 

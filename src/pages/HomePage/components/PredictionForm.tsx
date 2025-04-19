@@ -65,7 +65,7 @@ const PredictionForm = () => {
         try {
             setLoading(true);
             const response = await axios.post(
-                "http://192.168.23.171:8080/predict",
+                "http://192.168.23.171:8008/predict",
                 {
                     amount: data?.amount,
                     tenor: data?.tenor,
@@ -180,9 +180,11 @@ const PredictionForm = () => {
                                 });
                             }}
                         />
-                        <p className="font-14">
-                            Nominal investasi harus lebih dari Rp2.000.000 dan
-                            kurang dari Rp1.000.000.000
+                        <p className="font-14" style={{ color: "black" }}>
+                            Nominal investasi harus lebih dari{" "}
+                            <span className="fw-600">Rp2.000.000</span> dan
+                            kurang dari{" "}
+                            <span className="fw-600">Rp1.000.000.000</span>
                         </p>
                     </div>
                     <div className="input-wrapper" style={{ height: "45px" }}>
@@ -210,6 +212,7 @@ const PredictionForm = () => {
                 okText="Lanjut"
                 okButtonProps={{ loading: loading }}
                 cancelButtonProps={{ style: { display: "none" } }}
+                className="ant-modal-custom"
             >
                 <div className="modal-body-wrapper">
                     <p>
@@ -219,7 +222,7 @@ const PredictionForm = () => {
                         hasil pasti.
                     </p>
                     <p>
-                        Keputusan dan <strong>risiko</strong> investasi
+                        Keputusan dan <strong> risiko </strong> investasi
                         sepenuhnya menjadi{" "}
                         <strong>tanggung jawab pengguna</strong>.
                     </p>

@@ -116,7 +116,7 @@ const DetailPage: React.FC = () => {
             try {
                 setLoading(true);
                 const response = await axios.post(
-                    "http://192.168.23.171:8080/predicts-all",
+                    "http://192.168.23.171:8008/predicts-all",
                     {
                         amount: investmentAmount,
                     },
@@ -177,7 +177,7 @@ const DetailPage: React.FC = () => {
                                 indicator={<LoadingOutlined spin />}
                                 size="large"
                             />
-                            <p className="font-24 fw-400">predicting prices</p>
+                            <p className="font-18 fw-400">Predicting Prices</p>
                         </div>
                     ) : (
                         <>
