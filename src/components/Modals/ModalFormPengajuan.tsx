@@ -2,7 +2,6 @@ import { Button, Checkbox, Form, Input, message, Modal, Select } from "antd";
 import "./ModalFormPengajuan.scss";
 import axios from "axios";
 import { useState } from "react";
-import { formatNumber } from "../../utils/formatNumber";
 
 interface ModalFormPengajuanProps {
     isModalOpen: boolean;
