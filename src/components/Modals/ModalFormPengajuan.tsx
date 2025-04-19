@@ -141,7 +141,7 @@ const ModalFormPengajuan = ({
         const { tnc, ...restValues } = values;
         try {
             const response = await axios.post(
-                "http://192.168.23.171:8080/application-form",
+                "http://192.168.23.171:8008/application-form",
                 restValues,
             );
             setLoading(true);
@@ -200,7 +200,11 @@ const ModalFormPengajuan = ({
                                             rules={field.rules as any}
                                         >
                                             {field.inputType === "option" ? (
-                                                <Select placeholder="Pilih jenis kelamin">
+                                                <Select
+                                                    placeholder={
+                                                        field.placeholder
+                                                    }
+                                                >
                                                     {field.options?.map(
                                                         (
                                                             option,
