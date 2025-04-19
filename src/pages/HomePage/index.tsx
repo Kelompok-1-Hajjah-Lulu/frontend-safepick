@@ -1,8 +1,37 @@
 import React from "react";
 import "./HomePage.scss";
 import PredictionForm from "./components/PredictionForm";
+import axios from "axios";
+import { useState, useEffect } from "react";
+import { formatNumber } from "../../utils/formatNumber";
+import { message } from "antd";
 
 const HomePage: React.FC = () => {
+    const [data, setData] = useState<any>(null);
+    const [error, setError] = useState<string | null>(null);
+    const [loading, setLoading] = useState(false);
+
+    const [messageApi, contextHolder] = message.useMessage();
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                setLoading(true);
+                const response = await axios.get(
+                    "http://192.168.23.171:8008/gold-price/latest",
+                );
+                setData(response.data);
+            } catch (err) {
+                setError("Failed to fetch data");
+                messageApi.error(error);
+                console.error(err);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchData();
+    }, []);
     return (
         <section className="homepage">
             <p className="tagline font-24 desktop-only">
@@ -12,12 +41,13 @@ const HomePage: React.FC = () => {
                 </span>{" "}
                 tapi bingung harus ke mana?
             </p>
+            {contextHolder}
 
             <p className="subtext font-32 desktop-only">
                 Cukup isi <strong>nominal investasi</strong> dan{" "}
-                <strong>jangka waktu</strong>, kami kasih{" "}
-                <span className="highlight">rekomendasi</span> yang tepat,
-                jelas, dan mudah dipahami!
+                <strong>jangka waktu</strong>, kami berikan{" "}
+                <span className="highlight">rekomendasi</span> yang tepat dan
+                mudah dipahami!
             </p>
 
             <div className="input-section">
@@ -55,14 +85,32 @@ const HomePage: React.FC = () => {
                         <div className="price-block">
                             <small>Harga beli (/gram)</small>
                             <br />
-                            <strong>Rp1.877.000</strong>
+                            <strong>
+                                Rp
+                                {loading ? (
+                                    <>
+                                        <p>loading..</p>
+                                    </>
+                                ) : (
+                                    formatNumber(data?.price ?? 0)
+                                )}
+                            </strong>
                         </div>
 
                         <div className="separator" />
                         <div className="price-block">
                             <small>Harga jual (/gram)</small>
                             <br />
-                            <strong>Rp1.783.000</strong>
+                            <strong>
+                                Rp
+                                {loading ? (
+                                    <>
+                                        <p>loading..</p>
+                                    </>
+                                ) : (
+                                    formatNumber(data?.buyback_price ?? 0)
+                                )}
+                            </strong>
                         </div>
                     </div>
                 </div>

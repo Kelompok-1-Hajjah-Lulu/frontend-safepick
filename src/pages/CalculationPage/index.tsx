@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import TurnBackOnce from "../../components/TurnBackOnce";
 import "./CalculationPage.scss";
 import BaseCard from "../../components/Cards/BaseCard";
@@ -7,6 +7,8 @@ import { Button } from "antd";
 import BusinessMonitoringImage from "../../assets/images/business-monitoring.png";
 import DepositoIcon from "../../assets/images/deposito-icon.png";
 import GoldIcon from "../../assets/images/gold-icon.svg";
+import BagIcon from "../../assets/icons/bag-icon.svg";
+import TimeIcon from "../../assets/icons/time-icon.svg";
 import Badge from "../../components/Badges/Badge";
 import WarningCard from "../../components/Cards/WarningCard";
 import { useLocation } from "react-router-dom";
@@ -14,6 +16,7 @@ import { PredictionResponse } from "../HomePage/components/PredictionForm";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { formatNumber } from "../../utils/formatNumber";
+import ModalFormPengajuan from "../../components/Modals/ModalFormPengajuan";
 
 const CalculationPage: React.FC = () => {
     const location = useLocation();
@@ -23,7 +26,14 @@ const CalculationPage: React.FC = () => {
     const investmentAmount = location.state?.investment;
     const tenureAmount = location.state?.tenure;
 
+    const [modalFormPengajuan, setModalFormPengajuan] = useState(false);
+    const [clickedValue, setClickedValue] = useState("");
+
     const navigate = useNavigate();
+
+    useEffect(() => {
+        setClickedValue("");
+    }, [modalFormPengajuan]);
 
     useEffect(() => {
         if (!location.state || !predictionData) {
@@ -53,9 +63,27 @@ const CalculationPage: React.FC = () => {
                 src={BusinessMonitoringImage}
                 alt="Mata Gede"
             />
-            {/* <section className="input-section">
-                <PredictionForm />
-            </section> */}
+            <section>
+                <div className="calculation-header-tenure">
+                    <div className="askd">
+                        <img src={BagIcon} alt="Bag Icon" />
+                        <div className="flex flex-col">
+                            <p className="font-22 fw-600">Nominal Investasi</p>
+                            <p className="font-22">
+                                Rp{formatNumber(investmentAmount ?? 0)}
+                            </p>
+                        </div>
+                    </div>
+                    <div className="divider"></div>
+                    <div className="askd">
+                        <img src={TimeIcon} alt="Time Icon" />
+                        <div className="flex flex-col">
+                            <p className="font-22 fw-600">Jangka Waktu</p>
+                            <p className="font-22">{tenureAmount} Bulan</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
             <section className="calculation-card-wrapper">
                 <BaseCard
                     isRecommendation={predictionData?.recommend === "gold"}
@@ -84,8 +112,17 @@ const CalculationPage: React.FC = () => {
                                 />
                             </div>
                             <Button
-                                type="primary"
                                 className="custom-button green"
+                                onClick={() => {
+                                    setModalFormPengajuan(true);
+                                    setClickedValue("gold");
+                                }}
+                            >
+                                Ajukan Sekarang
+                            </Button>
+                            <Button
+                                type="primary"
+                                className="custom-button green outlined"
                                 onClick={() => {
                                     navigate("/calculation/gold", {
                                         state: {
@@ -129,8 +166,17 @@ const CalculationPage: React.FC = () => {
                                 />
                             </div>
                             <Button
-                                type="primary"
                                 className="custom-button green"
+                                onClick={() => {
+                                    setModalFormPengajuan(true);
+                                    setClickedValue("deposito");
+                                }}
+                            >
+                                Ajukan Sekarang
+                            </Button>
+                            <Button
+                                type="primary"
+                                className="custom-button green outlined"
                                 onClick={() => {
                                     navigate("/calculation/deposito", {
                                         state: {
@@ -151,6 +197,14 @@ const CalculationPage: React.FC = () => {
             <section className="calculation-warning-recommendation">
                 <WarningCard />
             </section>
+            <pre>{clickedValue}</pre>
+            <ModalFormPengajuan
+                isModalOpen={modalFormPengajuan}
+                setIsModalOpen={setModalFormPengajuan}
+                isGold={clickedValue === "gold"}
+                investmentAmount={investmentAmount}
+                tenureAmount={tenureAmount}
+            />
         </>
     );
 };

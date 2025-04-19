@@ -6,6 +6,9 @@ import { useState } from "react";
 interface ModalFormPengajuanProps {
     isModalOpen: boolean;
     setIsModalOpen: (isOpen: boolean) => void;
+    isGold: boolean;
+    investmentAmount: any;
+    tenureAmount: number;
 }
 
 const { Option } = Select;
@@ -98,8 +101,13 @@ const formFields = [
                 label: "Nominal Investasi",
                 name: "nominal",
                 placeholder: "Rp102.404.021",
-                rules: [{ required: true, message: "Tenor wajib diisi" }],
-                inputType: "text",
+                rules: [
+                    {
+                        required: true,
+                        message: "Nominal Investasi wajib diisi",
+                    },
+                ],
+                inputType: "number",
                 options: [],
             },
             {
@@ -126,6 +134,9 @@ const formFields = [
 const ModalFormPengajuan = ({
     isModalOpen,
     setIsModalOpen,
+    isGold,
+    investmentAmount,
+    tenureAmount,
 }: ModalFormPengajuanProps) => {
     const [form] = Form.useForm();
 
@@ -135,6 +146,13 @@ const ModalFormPengajuan = ({
 
     const handleCancel = () => {
         setIsModalOpen(false);
+    };
+
+    // Set default values for the form
+    const defaultValues = {
+        tipe_produk: isGold ? "tabunganEmas" : "deposito",
+        nominal: investmentAmount,
+        jangka_waktu: tenureAmount,
     };
 
     const onFinish = async (values: any) => {
@@ -198,6 +216,11 @@ const ModalFormPengajuan = ({
                                             }
                                             name={field.name}
                                             rules={field.rules as any}
+                                            initialValue={
+                                                defaultValues[
+                                                    field.name as keyof typeof defaultValues
+                                                ]
+                                            }
                                         >
                                             {field.inputType === "option" ? (
                                                 <Select
@@ -223,13 +246,20 @@ const ModalFormPengajuan = ({
                                                         ),
                                                     )}
                                                 </Select>
-                                            ) : (
+                                            ) : field.inputType === "number" ? (
+                                                <Input
+                                                    placeholder={
+                                                        field.placeholder
+                                                    }
+                                                    type="number"
+                                                />
+                                            ) : field.inputType === "text" ? (
                                                 <Input
                                                     placeholder={
                                                         field.placeholder
                                                     }
                                                 />
-                                            )}
+                                            ) : null}
                                         </Form.Item>
                                     </div>
                                 ))}

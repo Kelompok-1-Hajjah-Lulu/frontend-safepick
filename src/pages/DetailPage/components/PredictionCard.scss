@@ -11,8 +11,9 @@
     justify-content: space-between;
     .left-container {
         display: flex;
-        gap: 20px;
-        justify-content: space-between;
+        gap: 100px;
+        justify-content: center;
+        align-items: center;
         width: 100%;
     }
     .divider {
