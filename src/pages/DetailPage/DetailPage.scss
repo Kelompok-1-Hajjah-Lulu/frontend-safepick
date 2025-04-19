@@ -1,0 +1,87 @@
+@use "../../styles/variables";
+
+.calculation-warning-recommendation {
+    width: inherit;
+    padding: 20px 0;
+    display: flex;
+    width: 90vw;
+    gap: 20px;
+    flex-direction: row;
+}
+
+.button-wrapper-calculation {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+section.detail-wrapper {
+    gap: 20px;
+    .header-converter {
+        background-color: white;
+        border-radius: 20px;
+        box-shadow: 2px 2px 20px 0px #00000020;
+        padding: 20px 60px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        margin-top: -50px;
+        width: 100%;
+        max-width: 1200px;
+        margin-inline: auto;
+        @media (max-width: 769px) {
+            margin-top: 0;
+        }
+    }
+    .detail-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 20%;
+        gap: 10vw;
+        width: 100%;
+        img.card-icon {
+            width: 20%;
+            height: max-content;
+        }
+        .inner-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 2vw;
+            width: 40%;
+            .left-container {
+                display: flex;
+                justify-content: space-between;
+                width: 100%;
+                gap: 50px;
+            }
+            .divider {
+                height: 1px;
+                width: 100%;
+                background-color: #000000b2;
+            }
+            .right-container {
+                display: flex;
+                gap: 10px;
+                .custom-badge {
+                    margin-top: 7%;
+                    @media (max-width: 900px) {
+                    }
+                }
+            }
+        }
+    }
+    .return-prediction {
+        flex-wrap: wrap;
+        flex-direction: row;
+        gap: 20px;
+        width: 100%;
+        margin-block: 0;
+    }
+}

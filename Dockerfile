@@ -1,23 +1,25 @@
-# Stage 1: Build
+# Menggunakan base image yang ringan
 FROM node:18-alpine
 
-# Set working directory
+# Mengatur direktori kerja
 WORKDIR /app
 
 
-# Copy package files and install dependencies
+# Salin semua file proyek ke dalam container
 COPY . .
 
 
-# Installing dependencies
+# Instal dependensi
 RUN npm install
 
-# Build the Vite app
+# Build aplikasi untuk mode produksi
 RUN npm run build
 
-# Expose port 3000 for the production server
+# Instal `serve` untuk melayani file statis
+RUN npm install -g serve
+
+# Ekspos port untuk aplikasi
 EXPOSE 3000
 
-# Stage 2: Serve the app
+# Command untuk menjalankan aplikasi dalam mode produksi
 CMD ["serve", "-s", "dist", "-l", "3000"]
-

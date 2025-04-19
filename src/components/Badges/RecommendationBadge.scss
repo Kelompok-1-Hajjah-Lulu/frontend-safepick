@@ -1,0 +1,25 @@
+@use "../../styles/variables";
+
+.rekomendasi-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    width: fit-content;
+    height: fit-content;
+    padding: 4px 14px;
+    border-radius: 20px;
+    color: #c1470d;
+    background-color: variables.$light-gold-color;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
+    transition: background-color 0.3s ease;
+    img.custom-badge-icon {
+        width: 25px;
+        height: 25px;
+    }
+
+    &.green {
+        background-color: variables.$secondary-green-color;
+    }
+}

@@ -3,6 +3,10 @@
 .app-layout {
     overflow-x: hidden;
     width: 100vw;
-    min-height: 40vw;
+    // min-height: 100vh;
     position: relative;
+    // height: 100%;
+    .main-content {
+        margin-top: 18vh;
+    }
 }

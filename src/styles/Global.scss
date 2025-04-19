@@ -1,3 +1,4 @@
+@use "./variables";
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 /* Reset CSS */
@@ -6,6 +7,9 @@
     padding: 0;
     box-sizing: border-box;
     font-family: "Poppins", sans-serif;
+}
+p {
+    font-weight: 300;
 }
 
 body {
@@ -19,4 +23,62 @@ section {
     margin: 1vw auto;
     display: flex;
     flex-direction: column;
+}
+
+.text-white {
+    color: #ffffff;
+}
+
+.flex {
+    display: flex;
+    &.flex-col {
+        flex-direction: column;
+    }
+    &.flex-row {
+        flex-direction: row;
+    }
+}
+
+// overwrites
+// antd button
+button.custom-button {
+    width: 100%;
+    min-height: 40px;
+    color: white;
+    background-color: variables.$green-color;
+    border-radius: 12px;
+    font-size: 18px;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    &.outlined {
+        background-color: white;
+        border: 1px solid variables.$green-color;
+        color: variables.$green-color;
+    }
+    &:hover {
+        background-color: #00898bcf !important;
+    }
+}
+
+// Styling khusus untuk Modal Ant Design
+.ant-modal-title {
+    font-weight: bold;
+    color: #ff9900;
+}
+
+.ant-modal-body p {
+    margin-bottom: 0.5rem;
+}
+
+.desktop-only {
+    @media (max-width: 768px) {
+        display: none;
+    }
+}
+
+.mobile-only {
+    @media (min-width: 769px) {
+        display: none;
+    }
 }

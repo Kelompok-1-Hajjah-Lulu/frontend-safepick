@@ -1,0 +1,29 @@
+@use "../../styles/variables";
+
+.custom-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    width: fit-content;
+    height: fit-content;
+    padding: 0 10px 0 2px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 300;
+    color: variables.$green-color;
+    background-color: #007bff;
+    transition: background-color 0.3s ease;
+    img.custom-badge-icon {
+        width: 25px;
+        height: 25px;
+    }
+
+    &.green {
+        background-color: variables.$secondary-green-color;
+    }
+    &.red {
+        background-color: #ffe7e1;
+        color: #b03111;
+    }
+}
