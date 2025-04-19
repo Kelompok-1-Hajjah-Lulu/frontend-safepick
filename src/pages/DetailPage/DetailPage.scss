@@ -57,7 +57,8 @@ section.detail-wrapper {
             width: 40%;
             .left-container {
                 display: flex;
-                justify-content: space-between;
+                gap: 150px;
+                justify-content: center;
                 width: 100%;
                 gap: 50px;
             }
