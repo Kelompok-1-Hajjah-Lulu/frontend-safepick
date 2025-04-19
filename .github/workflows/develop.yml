@@ -45,3 +45,6 @@ jobs:
             -p 8081:3000 \
             --restart unless-stopped \
             ${{ secrets.DOCKERHUB_USERNAME }}/safepick-frontend:staging
+
+      - name: Clean Unused Images
+        run: docker image prune
