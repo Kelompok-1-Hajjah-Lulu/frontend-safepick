@@ -141,7 +141,6 @@ const PredictionForm = () => {
     return (
         <>
             {contextHolder}
-
             <div className="input-wrapper-section">
                 <div className="input-row">
                     <div
@@ -181,8 +180,12 @@ const PredictionForm = () => {
                                 });
                             }}
                         />
+                        <p className="font-14">
+                            Nominal investasi harus lebih dari Rp2.000.000 dan
+                            kurang dari Rp1.000.000.000
+                        </p>
                     </div>
-                    <div className="input-wrapper">
+                    <div className="input-wrapper" style={{ height: "45px" }}>
                         <label>Jangka Waktu</label>
                         <select onChange={handleTenorChange}>
                             <option>Pilih Jangka Waktu</option>

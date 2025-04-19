@@ -4,7 +4,7 @@ import "./BaseCard.scss";
 interface BaseCardProps {
     children?: React.ReactNode;
     isRecommendation?: boolean;
-    style: React.CSSProperties;
+    style?: React.CSSProperties;
 }
 
 const BaseCard = ({ children, isRecommendation, style }: BaseCardProps) => {

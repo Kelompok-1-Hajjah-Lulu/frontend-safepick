@@ -1,4 +1,4 @@
-import { Button, Checkbox, Form, Input, Modal, Select } from "antd";
+import { Button, Checkbox, Form, Input, message, Modal, Select } from "antd";
 import "./ModalFormPengajuan.scss";
 import axios from "axios";
 import { useState } from "react";
@@ -121,6 +121,8 @@ const formFields = [
     },
 ];
 
+// TODO add snackbar
+
 const ModalFormPengajuan = ({
     isModalOpen,
     setIsModalOpen,
@@ -129,9 +131,7 @@ const ModalFormPengajuan = ({
 
     const [loading, setLoading] = useState(false);
 
-    const handleOk = () => {
-        setIsModalOpen(false);
-    };
+    const [messageApi, contextHolder] = message.useMessage();
 
     const handleCancel = () => {
         setIsModalOpen(false);
@@ -146,9 +146,8 @@ const ModalFormPengajuan = ({
             );
             setLoading(true);
             form.resetFields();
+            messageApi.success(response?.data?.message);
             setIsModalOpen(false);
-
-            console.log(response.data);
         } catch (error) {
             console.error("Error submitting form:", error);
         } finally {
@@ -158,6 +157,7 @@ const ModalFormPengajuan = ({
 
     return (
         <>
+            {contextHolder}
             <Modal
                 title={
                     <span className="font-48" style={{ color: "#00898B" }}>
