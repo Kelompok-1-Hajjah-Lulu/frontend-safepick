@@ -1,54 +1,42 @@
-# React + TypeScript + Vite
+# SAFEPICK - Mulai Aman, Cuan Maksimal.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![alt text](assets/banner.png)
 
-Currently, two official plugins are available:
+> **SAFEPICK** adalah aplikasi pintar yang membantumu memilih investasi syariah rendah risiko yang paling menguntungkan — antara Deposito atau Tabungan Emas, berdasarkan nominal investasi dan jangka waktu yang kamu tentukan.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## Expanding the ESLint configuration
+## 🔍 Apa yang SAFE PICK Tawarkan?
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+📱 **Rekomendasi Investasi Otomatis**  
+Masukkan jumlah dan jangka waktu — SAFE PICK akan menghitung dan merekomendasikan opsi dengan **prediksi return terbaik**.
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+🏆 **Prediksi Return yang Jelas**  
+Tampilkan estimasi return (contoh: Rp2.500.000) langsung dalam bentuk visual interaktif.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+🟢 **Aman & Sesuai Syariah**  
+Diprioritaskan untuk produk halal: E-mas dan Deposito Syariah.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+⚡ **Cepat & Mudah**  
+Hanya butuh 3 detik untuk tahu di mana kamu bisa “cuan maksimal” dengan tetap aman.
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+---
+
+## 📂 Fitur Utama:
+
+| 💰 Deposito | Realisasikan impianmu dengan imbal hasil tetap & aman |
+|------------|--------------------------------------------------------|
+| ✨ E-mas    | Investasi emas digital, sesuai syariah dan fleksibel   |
+
+---
+
+## 🎯 Contoh Use Case:
+
+> “Saya punya Rp2.000.000 dan ingin investasi 6 bulan.  
+> SAFE PICK menyarankan saya ke **Tabungan Emas**, karena potensi return-nya lebih tinggi dibanding deposito biasa.”
+
+---
+
+## ✅ Cocok Untuk:
+- Milenial yang ingin mulai investasi tanpa ribet
+- Pengguna Muslim yang mencari produk halal
+- Siapa pun yang ingin memaksimalkan cuan dengan risiko rendah
