@@ -129,7 +129,6 @@ const formFields = [
     },
 ];
 
-// TODO add snackbar
 
 const ModalFormPengajuan = ({
     isModalOpen,
